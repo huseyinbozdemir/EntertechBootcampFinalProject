@@ -1,0 +1,17 @@
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\bin\Debug\net6.0\EntertechFP.BL.deps.json
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\bin\Debug\net6.0\EntertechFP.BL.dll
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\bin\Debug\net6.0\EntertechFP.BL.pdb
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\bin\Debug\net6.0\EntertechFP.DAL.dll
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\bin\Debug\net6.0\EntertechFP.EL.dll
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\bin\Debug\net6.0\EntertechFP.DAL.pdb
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\bin\Debug\net6.0\EntertechFP.EL.pdb
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\obj\Debug\net6.0\EntertechFP.BL.csproj.AssemblyReference.cache
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\obj\Debug\net6.0\EntertechFP.BL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\obj\Debug\net6.0\EntertechFP.BL.AssemblyInfoInputs.cache
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\obj\Debug\net6.0\EntertechFP.BL.AssemblyInfo.cs
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\obj\Debug\net6.0\EntertechFP.BL.csproj.CoreCompileInputs.cache
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\obj\Debug\net6.0\EntertechFP.BL.csproj.CopyComplete
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\obj\Debug\net6.0\EntertechFP.BL.dll
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\obj\Debug\net6.0\refint\EntertechFP.BL.dll
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\obj\Debug\net6.0\EntertechFP.BL.pdb
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.BL\obj\Debug\net6.0\ref\EntertechFP.BL.dll

@@ -1,0 +1,17 @@
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\bin\Debug\net6.0\EntertechFP.DAL.deps.json
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\bin\Debug\net6.0\EntertechFP.DAL.runtimeconfig.json
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\bin\Debug\net6.0\EntertechFP.DAL.dll
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\bin\Debug\net6.0\EntertechFP.DAL.pdb
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\bin\Debug\net6.0\EntertechFP.EL.dll
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\bin\Debug\net6.0\EntertechFP.EL.pdb
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\obj\Debug\net6.0\EntertechFP.DAL.csproj.AssemblyReference.cache
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\obj\Debug\net6.0\EntertechFP.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\obj\Debug\net6.0\EntertechFP.DAL.AssemblyInfoInputs.cache
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\obj\Debug\net6.0\EntertechFP.DAL.AssemblyInfo.cs
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\obj\Debug\net6.0\EntertechFP.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\obj\Debug\net6.0\EntertechFP.DAL.csproj.CopyComplete
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\obj\Debug\net6.0\EntertechFP.DAL.dll
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\obj\Debug\net6.0\refint\EntertechFP.DAL.dll
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\obj\Debug\net6.0\EntertechFP.DAL.pdb
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\obj\Debug\net6.0\EntertechFP.DAL.genruntimeconfig.cache
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.DAL\obj\Debug\net6.0\ref\EntertechFP.DAL.dll

@@ -1,0 +1,14 @@
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\bin\Debug\net6.0\EntertechFP.EL.deps.json
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\bin\Debug\net6.0\EntertechFP.EL.runtimeconfig.json
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\bin\Debug\net6.0\EntertechFP.EL.dll
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\bin\Debug\net6.0\EntertechFP.EL.pdb
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\obj\Debug\net6.0\EntertechFP.EL.csproj.AssemblyReference.cache
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\obj\Debug\net6.0\EntertechFP.EL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\obj\Debug\net6.0\EntertechFP.EL.AssemblyInfoInputs.cache
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\obj\Debug\net6.0\EntertechFP.EL.AssemblyInfo.cs
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\obj\Debug\net6.0\EntertechFP.EL.csproj.CoreCompileInputs.cache
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\obj\Debug\net6.0\EntertechFP.EL.dll
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\obj\Debug\net6.0\refint\EntertechFP.EL.dll
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\obj\Debug\net6.0\EntertechFP.EL.pdb
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\obj\Debug\net6.0\EntertechFP.EL.genruntimeconfig.cache
+C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.EL\obj\Debug\net6.0\ref\EntertechFP.EL.dll
