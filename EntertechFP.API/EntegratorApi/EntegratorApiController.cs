@@ -44,8 +44,8 @@ namespace EntertechFP.API.EntegratorApi
                 }
             }
         }
-        [HttpGet("GetEvents")]
-        public string GetEvents(string? apiKey, string? type = "json")
+        [HttpGet("{apikey}/{type}")]
+        public string GetEvents(string apiKey, string type = "json")
         {
             if (IsExists(apiKey))
             {
@@ -60,13 +60,13 @@ namespace EntertechFP.API.EntegratorApi
                     ? XmlSerialize(new BaseResponse<List<EventDto>>("Api Key doğrulanamadı."))
                     : JsonSerialize(new BaseResponse<List<EventDto>>("Api Key doğrulanamadı."));
         }
-        [HttpPost("CreateTicket")]
-        public BaseResponse<EntegratorEvent> CreateTicket(string? apiKey, int? eventId)
+        [HttpPost("{id}")]
+        public BaseResponse<EntegratorEvent> CreateTicket(int id, [FromQuery] string apiKey)
         {
             if (IsExists(apiKey))
             {
                 var entegrator = entegratorService.Get(e => e.ApiKey.Equals(apiKey));
-                var @event = eventService.Get(e => e.EventId == eventId);
+                var @event = eventService.Get(e => e.EventId == id);
                 if (@event is not null)
                 {
                     if (@event.EventDate < DateTime.Now || !@event.IsTicketed || !@event.IsApproved)
@@ -80,16 +80,16 @@ namespace EntertechFP.API.EntegratorApi
             else
                 return new BaseResponse<EntegratorEvent>("Api Key doğrulanamadı.");
         }
-        [HttpPut("TicketSold")]
-        public BaseResponse<Event> TicketSold(string? apiKey, int? eventId)
+        [HttpPatch("sell/{id}")]
+        public BaseResponse<Event> SellTicket(int id, [FromQuery]string apiKey)
         {
             if (IsExists(apiKey))
             {
                 var entegrator = entegratorService.Get(e => e.ApiKey.Equals(apiKey));
-                var entegratorEvent = entegratorEventService.Get(e => e.EntegratorId == entegrator.EntegratorId && e.EventId == eventId);
+                var entegratorEvent = entegratorEventService.Get(e => e.EntegratorId == entegrator.EntegratorId && e.EventId == id);
                 if (entegratorEvent is null)
                     return new BaseResponse<Event>("Bilet entegrasyonu bulunamadı.");
-                var @event = eventService.Get(e => e.EventId == eventId);
+                var @event = eventService.Get(e => e.EventId == id);
                 @event.Capacity--;
                 eventService.Update(@event);
                 return new BaseResponse<Event>(true);
@@ -97,16 +97,16 @@ namespace EntertechFP.API.EntegratorApi
             else
                 return new BaseResponse<Event>("Api Key doğrulanamadı.");
         }
-        [HttpPut("CancelTicket")]
-        public BaseResponse<Event> CancelTicket(string? apiKey, int? eventId)
+        [HttpPatch("cancel/{id}")]
+        public BaseResponse<Event> CancelTicket(int id, [FromQuery] string apiKey)
         {
             if (IsExists(apiKey))
             {
                 var entegrator = entegratorService.Get(e => e.ApiKey.Equals(apiKey));
-                var entegratorEvent = entegratorEventService.Get(e => e.EntegratorId == entegrator.EntegratorId && e.EventId == eventId);
+                var entegratorEvent = entegratorEventService.Get(e => e.EntegratorId == entegrator.EntegratorId && e.EventId == id);
                 if (entegratorEvent is null)
                     return new BaseResponse<Event>("Bilet entegrasyonu bulunamadı.");
-                var @event = eventService.Get(e => e.EventId == eventId);
+                var @event = eventService.Get(e => e.EventId == id);
                 @event.Capacity++;
                 eventService.Update(@event);
                 return new BaseResponse<Event>(true);
