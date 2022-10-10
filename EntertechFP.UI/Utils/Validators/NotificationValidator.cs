@@ -1,9 +1,9 @@
-﻿using EntertechFP.EL.Concrete;
+﻿using EntertechFP.UI.Models.Entitities;
 using FluentValidation;
 
 namespace EntertechFP.API.Utils.Validators
 {
-    public class NotificationValidator:AbstractValidator<Notification>
+    public class NotificationValidator:AbstractValidator<NotificationDto>
     {
         public NotificationValidator()
         {

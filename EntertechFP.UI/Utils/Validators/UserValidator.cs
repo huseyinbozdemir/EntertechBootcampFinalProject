@@ -1,9 +1,9 @@
-﻿using EntertechFP.EL.Concrete;
+﻿using EntertechFP.UI.Models.Entitities;
 using FluentValidation;
 
 namespace EntertechFP.API.Utils.Validators
 {
-    public class UserValidator : AbstractValidator<User>
+    public class UserValidator : AbstractValidator<UserDto>
     {
         public UserValidator()
         {

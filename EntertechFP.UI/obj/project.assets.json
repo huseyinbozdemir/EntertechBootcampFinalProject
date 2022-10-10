@@ -841,7 +841,6 @@
           "AutoMapper": "12.0.0",
           "EntertechFP.BL": "1.0.0",
           "EntertechFP.EL": "1.0.0",
-          "FluentValidation": "11.2.2",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.9"
         },
         "compile": {
@@ -2205,6 +2204,7 @@
       "EntertechFP.API >= 1.0.0",
       "EntertechFP.BL >= 1.0.0",
       "EntertechFP.EL >= 1.0.0",
+      "FluentValidation >= 11.2.2",
       "Newtonsoft.Json >= 13.0.1"
     ]
   },
@@ -2262,6 +2262,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "FluentValidation": {
+            "target": "Package",
+            "version": "[11.2.2, )"
+          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.1, )"

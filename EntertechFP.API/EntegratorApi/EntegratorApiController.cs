@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EntertechFP.API.Models;
+using EntertechFP.API.Models.Entities;
 using EntertechFP.API.Responses;
 using EntertechFP.BL.Abstract;
 using EntertechFP.BL.Concrete;
@@ -30,7 +30,7 @@ namespace EntertechFP.API.EntegratorApi
             this.mapper = mapper;
         }
 
-        private bool IsExists(string apiKey) => (entegratorService.Get(e => e.ApiKey.Equals(apiKey)) is not null) ? true : false;
+        private bool IsExists(string apiKey) => !(entegratorService.Get(e => e.ApiKey.Equals(apiKey)) is null);
         private string JsonSerialize<T>(T data) => JsonSerializer.Serialize(data);
         private string XmlSerialize<T>(T data)
         {

@@ -38,7 +38,7 @@ namespace EntertechFP.API.Controllers
                 return new BaseResponse<User>("Kullanıcı bulunamadı");
             return new BaseResponse<User>(data);
         }
-        [HttpGet("GetAll")]
+        [HttpGet]
         public BaseResponse<List<User>> GetAll()
              => new BaseResponse<List<User>>(userService.GetAll());
         [HttpPost]
@@ -56,7 +56,9 @@ namespace EntertechFP.API.Controllers
         [HttpPut("{id}")]
         public BaseResponse<User> Update(int id, [FromBody] User user)//
         {
-            var current = userService.Get(u => u.UserId == id);
+            var current = Get(id).Data;
+            if (current is null)
+                return new BaseResponse<User>("Kullanıcı bulunamadı.");
             if (!current.EmailAddress.Equals(user.EmailAddress) && userService.Get(u => u.EmailAddress.Equals(user.EmailAddress)) is not null)
                 return new BaseResponse<User>("Böyle bir mail adresi mevcut");
             current.FirstName = user.FirstName;
@@ -65,6 +67,15 @@ namespace EntertechFP.API.Controllers
             current.EmailAddress = user.EmailAddress;
             userService.Update(current);
             return new BaseResponse<User>(current);
+        }
+        [HttpDelete("{id}")]
+        public BaseResponse<User> Delete(int id)
+        {
+            var current = Get(id).Data;
+            if (current is null)
+                return new BaseResponse<User>("Kullanıcı bulunamadı");
+            userService.Delete(current);
+            return new BaseResponse<User>(true);
 
         }
     }

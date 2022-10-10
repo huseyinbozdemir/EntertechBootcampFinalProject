@@ -18,19 +18,6 @@
           }
         }
       },
-      "FluentValidation/11.2.2": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/FluentValidation.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/FluentValidation.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "Microsoft.AspNetCore.JsonPatch/6.0.9": {
         "type": "package",
         "dependencies": {
@@ -891,27 +878,6 @@
         "icon.png",
         "lib/netstandard2.1/AutoMapper.dll",
         "lib/netstandard2.1/AutoMapper.xml"
-      ]
-    },
-    "FluentValidation/11.2.2": {
-      "sha512": "5QEte2BUZZF6Sezeekr7Zu1THfgpxU7pmuL2SjIrajuGMah+pxPGiRiLtw+x/tSUSSVmcv9LrUe41lKu4l0n4A==",
-      "type": "package",
-      "path": "fluentvalidation/11.2.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "fluent-validation-icon.png",
-        "fluentvalidation.11.2.2.nupkg.sha512",
-        "fluentvalidation.nuspec",
-        "lib/net5.0/FluentValidation.dll",
-        "lib/net5.0/FluentValidation.xml",
-        "lib/net6.0/FluentValidation.dll",
-        "lib/net6.0/FluentValidation.xml",
-        "lib/netstandard2.0/FluentValidation.dll",
-        "lib/netstandard2.0/FluentValidation.xml",
-        "lib/netstandard2.1/FluentValidation.dll",
-        "lib/netstandard2.1/FluentValidation.xml"
       ]
     },
     "Microsoft.AspNetCore.JsonPatch/6.0.9": {
@@ -2180,7 +2146,6 @@
       "AutoMapper >= 12.0.0",
       "EntertechFP.BL >= 1.0.0",
       "EntertechFP.EL >= 1.0.0",
-      "FluentValidation >= 11.2.2",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 6.0.9"
     ]
   },
@@ -2238,10 +2203,6 @@
           "AutoMapper": {
             "target": "Package",
             "version": "[12.0.0, )"
-          },
-          "FluentValidation": {
-            "target": "Package",
-            "version": "[11.2.2, )"
           },
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
             "target": "Package",

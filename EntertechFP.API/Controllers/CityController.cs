@@ -27,6 +27,12 @@ namespace EntertechFP.API.Controllers
             ? new BaseResponse<List<City>>(cityService.GetAll())
             : new BaseResponse<List<City>>(cityService.GetAll(null, c => c.Events));
 
+        [HttpGet("{id}")]
+        public BaseResponse<City> Get(int id, int include = 0)
+            => include == 0
+            ? new BaseResponse<City>(cityService.Get(c => c.CityId == id))
+            : new BaseResponse<City>(cityService.Get(c => c.CityId == id, c => c.Events));
+
         [HttpPost]
         public BaseResponse<City> Add([FromBody] City city)
         {
@@ -38,7 +44,7 @@ namespace EntertechFP.API.Controllers
         [HttpPatch("{id}/{cityname}")]
         public BaseResponse<City> Update(int id, string cityName)
         {
-            var city = cityService.Get(c => c.CityId == id);
+            var city = Get(id).Data;
             if (cityService.Get(c => c.CityName.Equals(cityName)) is not null)
                 return new BaseResponse<City>("Şehir mevcut.");
             city.CityName = cityName;
@@ -48,7 +54,7 @@ namespace EntertechFP.API.Controllers
         [HttpDelete("{id}")]
         public BaseResponse<City> DeleteCity(int id)
         {
-            var city = cityService.Get(c => c.CityId == id);
+            var city = Get(id).Data;
             if (city is null)
                 return new BaseResponse<City>("Bu id'ye ait şehir bulunamadı.");
             cityService.Delete(city);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EntertechFP.EL.Concrete
 {
-    public partial class EventAttendance
+    public partial class EventAttendanceDto
     {
         public int EventId { get; set; }
         public int UserId { get; set; }

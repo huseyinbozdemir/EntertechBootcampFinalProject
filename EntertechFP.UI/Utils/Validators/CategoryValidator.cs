@@ -1,9 +1,9 @@
-﻿using EntertechFP.EL.Concrete;
+﻿using EntertechFP.UI.Models.Entitities;
 using FluentValidation;
 
-namespace EntertechFP.API.Utils.Validators
+namespace EntertechFP.UI.Utils.Validators
 {
-    public class CategoryValidator : AbstractValidator<Category>
+    public class CategoryValidator : AbstractValidator<CategoryDto>
     {
         public CategoryValidator()
         {

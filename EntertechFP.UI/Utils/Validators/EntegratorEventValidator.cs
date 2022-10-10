@@ -1,9 +1,9 @@
-﻿using EntertechFP.EL.Concrete;
+﻿using EntertechFP.UI.Models.Entitities;
 using FluentValidation;
 
 namespace EntertechFP.API.Utils.Validators
 {
-    public class EntegratorEventValidator:AbstractValidator<EntegratorEvent>
+    public class EntegratorEventValidator:AbstractValidator<EntegratorEventDto>
     {
         public EntegratorEventValidator()
         {

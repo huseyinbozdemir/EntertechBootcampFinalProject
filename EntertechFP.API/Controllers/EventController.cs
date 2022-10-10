@@ -23,13 +23,23 @@ namespace EntertechFP.API.Controllers
 
         [HttpGet]
         public BaseResponse<List<Event>> GetAll(int? categoryId = null, int? cityId = null, int include = 0)
-            => include == 0
-            ? new BaseResponse<List<Event>>(eventService.GetAll(c => c.CityId == cityId || c.CategoryId == c.CategoryId))
-            : new BaseResponse<List<Event>>(eventService.GetAll(c => c.CityId == cityId || c.CategoryId == c.CategoryId, c => c.City, c => c.User, c => c.Category));
-        [HttpGet("{id}")]
-        public BaseResponse<Event> Get(int id)
         {
-            var data = eventService.Get(e => e.EventId == id, e => e.Category, e => e.City, e => e.User);
+            var eventList = (include == 0)
+                 ? eventService.GetAll()
+                 : eventService.GetAll(null, c => c.City, c => c.User, c => c.Category);
+            if (categoryId is not null)
+                eventList = eventList.Where(e => e.CategoryId == categoryId).ToList();
+            if (cityId is not null)
+                eventList = eventList.Where(e => e.CityId == cityId).ToList();
+            return new BaseResponse<List<Event>>(eventList);
+
+        }
+        [HttpGet("{id}")]
+        public BaseResponse<Event> Get(int id, int include = 0)
+        {
+            var data = (include == 0) 
+                ? eventService.Get(e => e.EventId == id) 
+                : eventService.Get(e => e.EventId == id, e => e.Category, e => e.City, e => e.User);
             if (data is null)
                 return new BaseResponse<Event>("Etkinlik bulunamadı.");
             return new BaseResponse<Event>(data);

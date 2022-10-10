@@ -22,7 +22,7 @@ namespace EntertechFP.DAL.Concrete.Contexts
         public virtual DbSet<Entegrator> Entegrators { get; set; } = null!;
         public virtual DbSet<EntegratorEvent> EntegratorEvents { get; set; } = null!;
         public virtual DbSet<Event> Events { get; set; } = null!;
-        public virtual DbSet<EventAttendance> EventAttendances { get; set; } = null!;
+        public virtual DbSet<EventAttendanceDto> EventAttendances { get; set; } = null!;
         public virtual DbSet<Notification> Notifications { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
@@ -103,7 +103,7 @@ namespace EntertechFP.DAL.Concrete.Contexts
                     .HasConstraintName("FK_Events_Users");
             });
 
-            modelBuilder.Entity<EventAttendance>(entity =>
+            modelBuilder.Entity<EventAttendanceDto>(entity =>
             {
                 entity.HasNoKey();
 

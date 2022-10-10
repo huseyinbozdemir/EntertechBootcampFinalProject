@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "i1WPt2O0SPTZHiEkFHttNqLuwhOqson2JNLTCRGiqFU3Xg+es0FuTL2702jutVWPWd/x+ksY67p/AMbcwc7WTg==",
+  "dgSpecHash": "6TSrOPG1Rl77c+UpjkR+2xwxHKjfq5XoBe16t/aDicRntNP2qiSYrPg9rycDGbcZVrKrFJ6ZWVQ1w4HTm5amrw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hüseyin Bozdemir\\source\\repos\\Entertech Bootcamp\\EntertechFP\\EntertechFP.API\\EntertechFP.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hüseyin Bozdemir\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
-    "C:\\Users\\Hüseyin Bozdemir\\.nuget\\packages\\fluentvalidation\\11.2.2\\fluentvalidation.11.2.2.nupkg.sha512",
     "C:\\Users\\Hüseyin Bozdemir\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.9\\microsoft.aspnetcore.jsonpatch.6.0.9.nupkg.sha512",
     "C:\\Users\\Hüseyin Bozdemir\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.9\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.9.nupkg.sha512",
     "C:\\Users\\Hüseyin Bozdemir\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

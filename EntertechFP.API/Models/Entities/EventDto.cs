@@ -1,6 +1,6 @@
 ﻿using EntertechFP.EL.Concrete;
 
-namespace EntertechFP.API.Models
+namespace EntertechFP.API.Models.Entities
 {
     public class EventDto
     {

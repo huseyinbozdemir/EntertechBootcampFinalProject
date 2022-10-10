@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace EntertechFP.API.Utils.Validators
 {
-    public class EventAttendanceValidator:AbstractValidator<EventAttendance>
+    public class EventAttendanceValidator : AbstractValidator<EventAttendanceDto>
     {
         public EventAttendanceValidator()
         {

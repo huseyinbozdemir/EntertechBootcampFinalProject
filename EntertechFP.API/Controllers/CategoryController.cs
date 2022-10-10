@@ -29,6 +29,12 @@ namespace EntertechFP.API.Controllers
             ? new BaseResponse<List<Category>>(categoryService.GetAll())
             : new BaseResponse<List<Category>>(categoryService.GetAll(null, c => c.Events));
 
+        [HttpGet("{id}")]
+        public BaseResponse<Category> Get(int id, int include = 0)
+            => include == 0
+            ? new BaseResponse<Category>(categoryService.Get(c => c.CategoryId == id))
+            : new BaseResponse<Category>(categoryService.Get(c => c.CategoryId == id, c => c.Events));
+
         [HttpPost]
         public BaseResponse<Category> Add([FromBody] Category category)
         {
@@ -43,7 +49,7 @@ namespace EntertechFP.API.Controllers
         [HttpPatch("{id}/{categoryname}")]
         public BaseResponse<Category> Update(int id, string categoryName)
         {
-            var category = categoryService.Get(c => c.CategoryId == id);
+            var category = Get(id).Data;
             if (categoryService.Get(c => c.CategoryName.Equals(categoryName)) is not null)
                 return new BaseResponse<Category>("Kategori ismi mevcut");
             category.CategoryName = categoryName;
@@ -54,7 +60,7 @@ namespace EntertechFP.API.Controllers
         [HttpDelete("{id}")]
         public BaseResponse<Category> Delete(int id)
         {
-            var category = categoryService.Get(c => c.CategoryId == id);
+            var category = Get(id).Data;
             if (category is null)
                 return new BaseResponse<Category>("Bu id'ye ait bir kategori bulunamadı.");
             categoryService.Delete(category);

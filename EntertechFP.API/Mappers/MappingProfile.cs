@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EntertechFP.API.Models;
+using EntertechFP.API.Models.Entities;
 using EntertechFP.EL.Concrete;
 
 namespace EntertechFP.API.Mappers
