@@ -2,12 +2,7 @@
 using EntertechFP.DAL.Abstract.Repositories;
 using EntertechFP.DAL.Concrete.Contexts;
 using EntertechFP.DAL.Concrete.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntertechFP.BL.Concrete
 {

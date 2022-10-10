@@ -22,11 +22,11 @@ namespace EntertechFP.API.EntegratorApi
         private IEntegratorService entegratorService;
         private IEntegratorEventService entegratorEventService;
         private IMapper mapper;
-        public EntegratorApiController(IMapper mapper, IEventDal eventDal, IEntegratorDal entegratorDal, IEntegratorEventDal entegratorEventDal, OnlineEventDbContext context)
+        public EntegratorApiController(IMapper mapper, IEventService eventService, IEntegratorService entegratorService, IEntegratorEventService entegratorEventService)
         {
-            eventService = new EventService(eventDal,context);
-            entegratorService = new EntegratorService(entegratorDal,context);
-            entegratorEventService = new EntegratorEventService(entegratorEventDal,context);
+            this.eventService = eventService;
+            this.entegratorService = entegratorService;
+            this.entegratorEventService = entegratorEventService;
             this.mapper = mapper;
         }
 

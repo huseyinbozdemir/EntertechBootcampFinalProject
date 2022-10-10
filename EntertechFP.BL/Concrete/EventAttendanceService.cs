@@ -2,6 +2,7 @@
 using EntertechFP.DAL.Abstract;
 using EntertechFP.DAL.Concrete.Contexts;
 using EntertechFP.EL.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,9 @@ namespace EntertechFP.BL.Concrete
     public class EventAttendanceService : BaseService<EventAttendance>,IEventAttendanceService
     {
         private IEventAttendanceDal eventAttendanceDal;
-        private OnlineEventDbContext context;
-
         public EventAttendanceService(IEventAttendanceDal eventAttendanceDal, OnlineEventDbContext context) : base(context)
         {
             this.eventAttendanceDal = eventAttendanceDal;
-            this.context = context;
         }
     }
 }

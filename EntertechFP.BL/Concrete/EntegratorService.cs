@@ -2,6 +2,7 @@
 using EntertechFP.DAL.Abstract;
 using EntertechFP.DAL.Concrete.Contexts;
 using EntertechFP.EL.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,10 @@ namespace EntertechFP.BL.Concrete
     public class EntegratorService : BaseService<Entegrator>,IEntegratorService
     {
         private IEntegratorDal entegratorDal;
-        private OnlineEventDbContext context;
 
         public EntegratorService(IEntegratorDal entegratorDal, OnlineEventDbContext context) : base(context)
         {
             this.entegratorDal = entegratorDal;
-            this.context = context;
         }
     }
 }

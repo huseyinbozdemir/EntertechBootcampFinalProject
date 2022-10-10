@@ -8,6 +8,7 @@ using EntertechFP.DAL.Concrete.Contexts;
 using EntertechFP.EL.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EntertechFP.API.Controllers
 {

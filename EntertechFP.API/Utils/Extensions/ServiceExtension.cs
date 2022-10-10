@@ -10,23 +10,23 @@ namespace EntertechFP.API.Utils.Extensions
     {
         public static void AddServices(this IServiceCollection services)
         {
-            services.AddSingleton<IEventDal, EventDal>();
-            services.AddSingleton<IEventAttendanceDal, EventAttendanceDal>();
-            services.AddSingleton<IUserDal, UserDal>();
-            services.AddSingleton<INotificationDal, NotificationDal>();
-            services.AddSingleton<ICityDal, CityDal>();
-            services.AddSingleton<ICategoryDal, CategoryDal>();
-            services.AddSingleton<IEntegratorDal, EntegratorDal>();
-            services.AddSingleton<IEntegratorEventDal, EntegratorEventDal>();
-                     
-            services.AddSingleton<ICategoryService, CategoryService>();
-            services.AddSingleton<ICityService, CityService>();
-            services.AddSingleton<IEntegratorService, EntegratorService>();
-            services.AddSingleton<IEntegratorEventService, EntegratorEventService>();
-            services.AddSingleton<IEventAttendanceService, EventAttendanceService>();
-            services.AddSingleton<IEventService, EventService>();
-            services.AddSingleton<IUserService, UserService>();
-            services.AddSingleton<INotificationService, NotificationService>();
+            services.AddScoped<IEventDal, EventDal>();
+            services.AddScoped<IEventAttendanceDal, EventAttendanceDal>();
+            services.AddScoped<IUserDal, UserDal>();
+            services.AddScoped<INotificationDal, NotificationDal>();
+            services.AddScoped<ICityDal, CityDal>();
+            services.AddScoped<ICategoryDal, CategoryDal>();
+            services.AddScoped<IEntegratorDal, EntegratorDal>();
+            services.AddScoped<IEntegratorEventDal, EntegratorEventDal>();
+
+            services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IEventAttendanceService, EventAttendanceService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IEntegratorService, EntegratorService>();
+            services.AddScoped<IEntegratorEventService, EntegratorEventService>();
         }
     }
 }
