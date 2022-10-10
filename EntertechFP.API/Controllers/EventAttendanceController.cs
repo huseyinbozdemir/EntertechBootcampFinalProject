@@ -21,11 +21,11 @@ namespace EntertechFP.API.Controllers
         private IEventAttendanceService eventAttendanceService;
         private IEventService eventService;
         private IUserService userService;
-        public EventAttendanceController(IEventDal eventdal, IUserDal userdal, IEventAttendanceDal eventAttendanceDal, OnlineEventDbContext context)
+        public EventAttendanceController(IEventAttendanceService eventAttendanceService, IEventService eventService, IUserService userService)
         {
-            this.eventAttendanceService = new EventAttendanceService(eventAttendanceDal, context);
-            this.eventService = new EventService(eventdal, context);
-            this.userService = new UserService(userdal, context);
+            this.eventAttendanceService = eventAttendanceService;
+            this.eventService = eventService;
+            this.userService = userService;
         }
 
         [HttpGet("GetAll")]

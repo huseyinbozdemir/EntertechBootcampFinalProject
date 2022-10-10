@@ -17,9 +17,9 @@ namespace EntertechFP.API.Controllers
     public class CityController : ControllerBase
     {
         private ICityService cityService;
-        public CityController(ICityDal cityDal, OnlineEventDbContext context)
+        public CityController(ICityService cityService)
         {
-            this.cityService = new CityService(cityDal,context);
+            this.cityService = cityService;
         }
         [HttpGet]
         public BaseResponse<List<City>> GetAll(int include = 0)

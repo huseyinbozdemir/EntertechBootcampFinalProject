@@ -19,9 +19,9 @@ namespace EntertechFP.API.Controllers
     public class EntegratorController : ControllerBase
     {
         private IEntegratorService entegratorService;
-        public EntegratorController(IEntegratorDal entegratorDal,OnlineEventDbContext context)
+        public EntegratorController(IEntegratorService entegratorService)
         {
-            this.entegratorService = new EntegratorService(entegratorDal,context);
+            this.entegratorService = entegratorService;
         }
         [HttpGet("{mailaddress}/{password}")]
         public BaseResponse<Entegrator> Get(string mailAddress, string password)

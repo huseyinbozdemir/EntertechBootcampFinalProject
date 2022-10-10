@@ -17,9 +17,9 @@ namespace EntertechFP.API.Controllers
     public class EntegratorEventController : ControllerBase
     {
         private IEntegratorEventService entegratorEventService;
-        public EntegratorEventController(IEntegratorEventDal entegratorEventDal, OnlineEventDbContext context)
+        public EntegratorEventController(IEntegratorEventService entegratorEventService)
         {
-            this.entegratorEventService = new EntegratorEventService(entegratorEventDal,context);
+            this.entegratorEventService = entegratorEventService;
         }
 
         [HttpGet]

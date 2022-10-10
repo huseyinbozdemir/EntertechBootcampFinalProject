@@ -18,9 +18,9 @@ namespace EntertechFP.API.Controllers
     public class UserController : ControllerBase
     {
         private IUserService userService;
-        public UserController(IUserDal userDal, OnlineEventDbContext context)
+        public UserController(IUserService userService)
         {
-            this.userService = new UserService(userDal, context);
+            this.userService = userService;
         }
         [HttpGet("{mailaddress}/{password}")]
         public BaseResponse<User> Get(string mailAddress, string password)

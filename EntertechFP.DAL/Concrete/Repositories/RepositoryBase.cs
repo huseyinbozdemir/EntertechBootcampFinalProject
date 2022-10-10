@@ -13,7 +13,7 @@ namespace EntertechFP.DAL.Concrete.Repositories
     public class RepositoryBase<Entity> : IEntityRepository<Entity>
         where Entity : class, new()
     {
-        private DbContext context;
+        protected DbContext context;
         public RepositoryBase(DbContext context)
         {
             this.context = context;

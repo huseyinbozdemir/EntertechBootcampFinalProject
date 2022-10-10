@@ -16,9 +16,9 @@ namespace EntertechFP.API.Controllers
     public class EventController : ControllerBase
     {
         private IEventService eventService;
-        public EventController(IEventDal eventDal, OnlineEventDbContext context)
+        public EventController(IEventService eventService)
         {
-            this.eventService = new EventService(eventDal, context);
+            this.eventService = eventService;
         }
 
         [HttpGet]

@@ -17,9 +17,9 @@ namespace EntertechFP.API.Controllers
     public class NotificationController : ControllerBase
     {
         private INotificationService notificationService;
-        public NotificationController(INotificationDal notificationDal, OnlineEventDbContext context)
+        public NotificationController(INotificationService notificationService)
         {
-            this.notificationService = new NotificationService(notificationDal, context);
+            this.notificationService = notificationService;
         }
         [HttpGet("{id}")]
         public BaseResponse<List<Notification>> GetAll(int id)
