@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using EntertechFP.API.Mappers;
 using EntertechFP.BL.Abstract;
 using EntertechFP.BL.Concrete;
 using EntertechFP.DAL.Abstract;
 using EntertechFP.DAL.Concrete;
+using EntertechFP.DAL.Concrete.Contexts;
 
 namespace EntertechFP.API.Utils.Extensions
 {
@@ -27,6 +29,17 @@ namespace EntertechFP.API.Utils.Extensions
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IEntegratorService, EntegratorService>();
             services.AddScoped<IEntegratorEventService, EntegratorEventService>();
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+            services.AddControllers().AddNewtonsoftJson(opt =>
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
         }
     }
 }

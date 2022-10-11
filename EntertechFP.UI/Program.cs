@@ -1,3 +1,4 @@
+using EntertechFP.UI.Utils;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.Name = "adm_session";
 
     });
+builder.Services.AddScoped<CookieHelper>();
+builder.Services.AddScoped<RequestHelper>(x => new RequestHelper(builder.Configuration.GetSection("ApiKey").Value));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

@@ -10,10 +10,13 @@ namespace EntertechFP.UI.Controllers.Admin
     public class AdminController : Controller
     {
         private readonly IConfiguration configuration;
-
-        public AdminController(IConfiguration configuration)
+        private readonly CookieHelper cookieHelper;
+        private readonly RequestHelper requestHelper;
+        public AdminController(IConfiguration configuration, CookieHelper cookieHelper, RequestHelper requestHelper)
         {
             this.configuration = configuration;
+            this.cookieHelper = cookieHelper;
+            this.requestHelper = requestHelper;
         }
         private string GetConfigurationInfo(string key)
         {
@@ -31,7 +34,7 @@ namespace EntertechFP.UI.Controllers.Admin
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Login(AdminViewModel model)
+        public IActionResult Login(LoginViewModel model)
         {
             string username = GetConfigurationInfo("Admin:username");
             string password = GetConfigurationInfo("Admin:password");
@@ -42,7 +45,6 @@ namespace EntertechFP.UI.Controllers.Admin
                     new Claim(ClaimTypes.Name,"Admin"),
                     new Claim(ClaimTypes.Role,"Admin")
                 };
-                CookieHelper cookieHelper = new CookieHelper();
                 cookieHelper.SignIn(claims, model.RememberMe, this);
                 return RedirectToAction("Index");
             }
