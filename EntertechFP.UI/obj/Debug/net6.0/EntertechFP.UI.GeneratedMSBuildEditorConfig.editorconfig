@@ -15,12 +15,12 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.UI
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Hüseyin Bozdemir/source/repos/Entertech Bootcamp/EntertechFP/EntertechFP.UI/Views/Admin/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Hüseyin Bozdemir/source/repos/Entertech Bootcamp/EntertechFP/EntertechFP.UI/Views/Admin/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Hüseyin Bozdemir/source/repos/Entertech Bootcamp/EntertechFP/EntertechFP.UI/Views/Admin/PendingEvents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGVuZGluZ0V2ZW50cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Hüseyin Bozdemir/source/repos/Entertech Bootcamp/EntertechFP/EntertechFP.UI/Views/Home/Index.cshtml]

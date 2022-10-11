@@ -17,7 +17,7 @@ namespace EntertechFP.EL.Concrete
         public int? CategoryId { get; set; }
         public decimal? Fare { get; set; }
         public bool IsTicketed { get; set; }
-        public bool IsApproved { get; set; }
+        public bool? IsApproved { get; set; }
 
         public virtual Category? Category { get; set; }
         public virtual City? City { get; set; }

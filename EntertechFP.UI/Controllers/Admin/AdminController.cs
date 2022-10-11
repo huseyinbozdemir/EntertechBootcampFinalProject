@@ -1,4 +1,5 @@
-﻿using EntertechFP.UI.Models.ViewModels;
+﻿using EntertechFP.UI.Models.Entitities;
+using EntertechFP.UI.Models.ViewModels;
 using EntertechFP.UI.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -55,9 +56,22 @@ namespace EntertechFP.UI.Controllers.Admin
             }
         }
         [HttpGet]
+        public IActionResult Logout()
+        {
+            cookieHelper.SignOut(this);
+            return RedirectToAction("Login");
+        }
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("PendingEvents");
+        }
+        [HttpGet]
+        public IActionResult PendingEvents()
+        {
+            var model = requestHelper.Action<List<EventDto>>("event/?include=0&pending=1", ActionType.Get, null);
+            var result = model.Result.Data;
+            return View(result);
         }
     }
 }

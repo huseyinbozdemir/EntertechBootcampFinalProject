@@ -1,23 +1,11 @@
 {
   "Version": 1,
-  "Hash": "iAZHRKjBIoBYyjOmm4ptbUCACA/nkUI+Z95/tTkHqHg=",
+  "Hash": "Nw95K2bGnyI5Ki9cZ/l6xJo5jnbDWQppMe/FrCgQrVs=",
   "Source": "EntertechFP.UI",
   "BasePath": "_content/EntertechFP.UI",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [
-    {
-      "Identity": "C:\\Users\\Hüseyin Bozdemir\\source\\repos\\Entertech Bootcamp\\EntertechFP\\EntertechFP.API\\EntertechFP.API.csproj",
-      "Version": 2,
-      "Source": "EntertechFP.API",
-      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier",
-      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier"
-    }
-  ],
+  "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
       "Name": "EntertechFP.UI\\wwwroot",
@@ -571,6 +559,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\highlighter.css"
+    },
+    {
+      "Identity": "C:\\Users\\Hüseyin Bozdemir\\source\\repos\\Entertech Bootcamp\\EntertechFP\\EntertechFP.UI\\wwwroot\\img\\Admin-icon.png",
+      "SourceId": "EntertechFP.UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hüseyin Bozdemir\\source\\repos\\Entertech Bootcamp\\EntertechFP\\EntertechFP.UI\\wwwroot\\",
+      "BasePath": "_content/EntertechFP.UI",
+      "RelativePath": "img/Admin-icon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\Admin-icon.png"
     },
     {
       "Identity": "C:\\Users\\Hüseyin Bozdemir\\source\\repos\\Entertech Bootcamp\\EntertechFP\\EntertechFP.UI\\wwwroot\\img\\AdminLTELogo.png",

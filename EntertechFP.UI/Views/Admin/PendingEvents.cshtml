@@ -1,0 +1,42 @@
+﻿@using EntertechFP.UI.Models.Entitities
+@model List<EventDto>
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th style="width: 10px">#</th>
+            <th>Etkinlik Adı</th>
+            <th style="width: 200px">Durum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@(i+1)</td>
+                <td>@Model[i].EventName</td>
+                <td>
+                @switch (Model[i].IsApproved)
+                {
+                    case true:
+                    <span class="badge bg-success">Onaylandı</span>
+                        break;
+                    case false:
+                    <span class="badge bg-danger">Reddedildi</span>
+                        break;
+                    case null:
+                    <span class="badge bg-primary">Bekliyor</span>
+                        break;
+                }
+                @if(Model[i].IsApproved is null)
+                {
+                    <button type="button" class="btn btn-success btn-sm">
+                        <i class="fas fa-check"></i>
+                    </button>
+                }
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

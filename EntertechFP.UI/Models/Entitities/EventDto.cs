@@ -14,7 +14,7 @@
         public int? CategoryId { get; set; }
         public decimal? Fare { get; set; }
         public bool IsTicketed { get; set; }
-        public bool IsApproved { get; set; }
+        public bool? IsApproved { get; set; }
 
         public CategoryDto? Category { get; set; }
         public CityDto? City { get; set; }

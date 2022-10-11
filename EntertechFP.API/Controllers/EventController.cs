@@ -22,7 +22,7 @@ namespace EntertechFP.API.Controllers
         }
 
         [HttpGet]
-        public BaseResponse<List<Event>> GetAll(int? categoryId = null, int? cityId = null, int include = 0)
+        public BaseResponse<List<Event>> GetAll(int? categoryId = null, int? cityId = null, int include = 0, int pending = 0)
         {
             var eventList = (include == 0)
                  ? eventService.GetAll()
@@ -31,14 +31,16 @@ namespace EntertechFP.API.Controllers
                 eventList = eventList.Where(e => e.CategoryId == categoryId).ToList();
             if (cityId is not null)
                 eventList = eventList.Where(e => e.CityId == cityId).ToList();
+            if (pending != 0)
+                eventList = eventList.Where(e => e.IsApproved is null).ToList();
             return new BaseResponse<List<Event>>(eventList);
 
         }
         [HttpGet("{id}")]
         public BaseResponse<Event> Get(int id, int include = 0)
         {
-            var data = (include == 0) 
-                ? eventService.Get(e => e.EventId == id) 
+            var data = (include == 0)
+                ? eventService.Get(e => e.EventId == id)
                 : eventService.Get(e => e.EventId == id, e => e.Category, e => e.City, e => e.User);
             if (data is null)
                 return new BaseResponse<Event>("Etkinlik bulunamadı.");

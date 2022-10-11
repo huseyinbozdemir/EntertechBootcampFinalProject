@@ -49,7 +49,7 @@ namespace EntertechFP.API.EntegratorApi
         {
             if (IsExists(apiKey))
             {
-                var data = eventService.GetAll(x => x.IsTicketed && x.EventDate > DateTime.Now && x.IsApproved);
+                var data = eventService.GetAll(x => x.IsTicketed && x.EventDate > DateTime.Now && x.IsApproved==true);
                 var dto = mapper.Map<List<EventDto>>(data);
                 return (type.Equals("xml"))
                     ? XmlSerialize(new BaseResponse<List<EventDto>>(dto))
@@ -69,7 +69,7 @@ namespace EntertechFP.API.EntegratorApi
                 var @event = eventService.Get(e => e.EventId == id);
                 if (@event is not null)
                 {
-                    if (@event.EventDate < DateTime.Now || !@event.IsTicketed || !@event.IsApproved)
+                    if (@event.EventDate < DateTime.Now || !@event.IsTicketed || @event.IsApproved==false)
                         return new BaseResponse<EntegratorEvent>("Etkinlik uygun değil");
                     entegratorEventService.Add(new EntegratorEvent { EntegratorId = entegrator.EntegratorId, EventId = @event.EventId });
                     return new BaseResponse<EntegratorEvent>(true);
