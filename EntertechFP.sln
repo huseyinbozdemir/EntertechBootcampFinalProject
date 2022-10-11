@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntertechFP.DAL", "Entertec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntertechFP.BL", "EntertechFP.BL\EntertechFP.BL.csproj", "{C2B761FA-4EB7-4D53-83D8-5E1D3359250E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntertechFP.UI", "EntertechFP.UI\EntertechFP.UI.csproj", "{8ECA0722-ED9D-4E7B-948D-D0D96BCE183F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntertechFP.UI", "EntertechFP.UI\EntertechFP.UI.csproj", "{8ECA0722-ED9D-4E7B-948D-D0D96BCE183F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntertechFP.API", "EntertechFP.API\EntertechFP.API.csproj", "{DB362856-E85A-4B59-8EC2-3763B1E9AFDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntertechFP.API", "EntertechFP.API\EntertechFP.API.csproj", "{DB362856-E85A-4B59-8EC2-3763B1E9AFDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

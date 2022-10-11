@@ -59,7 +59,6 @@ C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\Entertech
 C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.API\bin\Debug\net6.0\EntertechFP.DAL.pdb
 C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.API\obj\Debug\net6.0\EntertechFP.API.csproj.CopyComplete
 C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.API\bin\Debug\net6.0\AutoMapper.dll
-C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.API\bin\Debug\net6.0\FluentValidation.dll
 C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.API\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.API\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Hüseyin Bozdemir\source\repos\Entertech Bootcamp\EntertechFP\EntertechFP.API\bin\Debug\net6.0\Newtonsoft.Json.dll

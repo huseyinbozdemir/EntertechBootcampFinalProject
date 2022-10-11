@@ -16,10 +16,10 @@ namespace EntertechFP.UI.Controllers
 
         public IActionResult Index()
         {
-            var key = configuration.GetSection("ApiKey").Get<string>();
-            RequestHelper request = new RequestHelper(key);
-            var user = new User { FirstName = "Huseyin", LastName = "test", Password = "098f6bcd4621d373cade4e832627b4f6", EmailAddress = "test@gmail.com" };
-            var result = request.Action<List<CategoryDto>>("category", ActionType.Get, null);
+            //var key = configuration.GetSection("ApiKey").Get<string>();
+            //RequestHelper request = new RequestHelper(key);
+            //var user = new User { FirstName = "Huseyin", LastName = "test", Password = "098f6bcd4621d373cade4e832627b4f6", EmailAddress = "test@gmail.com" };
+            //var result = request.Action<List<CategoryDto>>("category", ActionType.Get, null);
             return View();
         }
 

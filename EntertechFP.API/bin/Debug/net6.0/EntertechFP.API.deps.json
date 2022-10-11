@@ -11,7 +11,6 @@
           "AutoMapper": "12.0.0",
           "EntertechFP.BL": "1.0.0",
           "EntertechFP.EL": "1.0.0",
-          "FluentValidation": "11.2.2",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.9"
         },
         "runtime": {
@@ -26,14 +25,6 @@
           "lib/netstandard2.1/AutoMapper.dll": {
             "assemblyVersion": "12.0.0.0",
             "fileVersion": "12.0.0.0"
-          }
-        }
-      },
-      "FluentValidation/11.2.2": {
-        "runtime": {
-          "lib/net6.0/FluentValidation.dll": {
-            "assemblyVersion": "11.0.0.0",
-            "fileVersion": "11.2.2.0"
           }
         }
       },
@@ -513,13 +504,6 @@
       "sha512": "sha512-0Rmg0zI5AFu1O/y//o9VGyhxKjhggWpk9mOA1tp0DEVx40c61bs+lnQv+0jUq8XbniF7FKgIVvI1perqiMtLrA==",
       "path": "automapper/12.0.0",
       "hashPath": "automapper.12.0.0.nupkg.sha512"
-    },
-    "FluentValidation/11.2.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-5QEte2BUZZF6Sezeekr7Zu1THfgpxU7pmuL2SjIrajuGMah+pxPGiRiLtw+x/tSUSSVmcv9LrUe41lKu4l0n4A==",
-      "path": "fluentvalidation/11.2.2",
-      "hashPath": "fluentvalidation.11.2.2.nupkg.sha512"
     },
     "Microsoft.AspNetCore.JsonPatch/6.0.9": {
       "type": "package",
