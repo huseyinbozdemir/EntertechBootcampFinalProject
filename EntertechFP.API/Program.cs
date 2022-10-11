@@ -1,10 +1,6 @@
 using AutoMapper;
 using EntertechFP.API.Mappers;
 using EntertechFP.API.Utils.Extensions;
-using EntertechFP.BL.Abstract;
-using EntertechFP.BL.Concrete;
-using EntertechFP.DAL.Abstract;
-using EntertechFP.DAL.Concrete;
 using EntertechFP.DAL.Concrete.Contexts;
 using Microsoft.EntityFrameworkCore;
 

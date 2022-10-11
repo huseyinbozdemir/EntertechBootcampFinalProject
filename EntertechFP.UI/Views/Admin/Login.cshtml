@@ -22,7 +22,7 @@
                 <p class="h1"><b>Admin</b> Giriş Ekranı</p>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">İşlem yapabilmek için giriş yap</p>
+                <p class="login-box-msg">Entertech Final Project</p>
 
                 <form action="@Url.Action("Login")" method="post">
                     <div class="input-group mb-3">
@@ -44,15 +44,16 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember" name="rememberme">
-                                <label for="remember">
-                                    Beni Hatırla
-                                </label>
+                                @Html.CheckBox("RememberMe",false)
+                                @Html.Label("RememberMe","Beni Hatırla")
                             </div>
                         </div>
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
                         </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <p class="text-danger">@ViewBag.Error</p>
                     </div>
                 </form>
 

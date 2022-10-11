@@ -1,14 +1,12 @@
 ﻿using EntertechFP.UI.Models.ViewModels;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using EntertechFP.UI.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Security.Claims;
 
 namespace EntertechFP.UI.Controllers.Admin
 {
-    [Authorize]
+    [Authorize(Roles="Admin")]
     public class AdminController : Controller
     {
         private readonly IConfiguration configuration;
@@ -26,6 +24,8 @@ namespace EntertechFP.UI.Controllers.Admin
         [AllowAnonymous]
         public IActionResult Login()
         {
+            if (HttpContext.Request.Cookies["adm_session"] is not null)
+                return RedirectToAction("Index");
             return View();
         }
 
@@ -42,18 +42,13 @@ namespace EntertechFP.UI.Controllers.Admin
                     new Claim(ClaimTypes.Name,"Admin"),
                     new Claim(ClaimTypes.Role,"Admin")
                 };
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var authProps = new AuthenticationProperties();
-                if (model.RememberMe is not null)
-                    authProps.ExpiresUtc = DateTimeOffset.UtcNow.AddDays(15);
-                else
-                    authProps.ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1);
-                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
+                CookieHelper cookieHelper = new CookieHelper();
+                cookieHelper.SignIn(claims, model.RememberMe, this);
                 return RedirectToAction("Index");
             }
             else
             {
-                ViewBag.Error = "Hatalı kullanıcı adı veya şifre.";
+                ViewBag.Error = "Kullanıcı adı veya şifre hatalı.";
                 return View();
             }
         }
