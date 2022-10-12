@@ -1,0 +1,73 @@
+﻿@using EntertechFP.UI.Models.Entitities
+@model EventDto
+
+<section class="content">
+    <div class="content-header">
+        <h1>Etkinlik Detayları</h1>
+    </div>
+    <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-search"></i>
+                    Etkinlik Detayları
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="eventName">Etkinlik İsmi</label>
+                    <input type="text" id="eventName" class="form-control" readonly value="@Model.EventName">
+                </div>
+                <div class="form-group">
+                    <label for="eventDescription">Etkinlik Açıklaması</label>
+                    <textarea id="eventDescription" class="form-control" rows="3" readonly>@Model.Description</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="capacity">Kapasite</label>
+                    <input type="text" id="capacity" class="form-control" readonly value="@Model.Capacity Kişi">
+                </div>
+                <div class="form-group">
+                    <label for="capacity">Etkinlik Tarihi</label>
+                    <input type="text" id="capacity" class="form-control" readonly value="@Model.EventDate.ToShortDateString()">
+                </div>
+                @if(Model.User is not null){
+                    <div class="form-group">
+                        <label for="userName">Etkinliği Oluşturan Kullanıcı</label>
+                        <input type="text" id="userName" class="form-control" value="@($"{Model.User.FirstName} {Model.User.LastName}")" readonly>
+                    </div>
+                }
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-1">
+                            <div class="form-check">
+                                @if (Model.IsTicketed == true)
+                                {
+                                    <input type="checkbox" class="form-check-input" id="IsTicketed" checked onclick="return false;">
+                                }
+                                else
+                                {
+                                    <input type="checkbox" class="form-check-input" id="IsTicketed" onclick="return false;">
+                                }
+                                <label class="form-check-label" for="IsTicketed">Biletli</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-check">
+                                @if (Model.IsApproved == true)
+                                {
+                                    <input type="checkbox" class="form-check-input" id="IsApproved" checked onclick="return false;">
+                                }
+                                else
+                                {
+                                    <input type="checkbox" class="form-check-input" id="IsApproved" onclick="return false;">
+                                }
+                                <label class="form-check-label" for="IsApproved">Onaylı</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

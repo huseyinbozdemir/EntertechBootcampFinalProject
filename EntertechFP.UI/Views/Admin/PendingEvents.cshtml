@@ -1,12 +1,18 @@
 ﻿@using EntertechFP.UI.Models.Entitities
 @model List<EventDto>
-
+<section class="content">
+    <div class="content-header">
+        <h1>Onay Bekleyen Etkinlikler</h1>
+    </div>
 <table class="table table-sm">
     <thead>
         <tr>
-            <th style="width: 10px">#</th>
-            <th>Etkinlik Adı</th>
-            <th style="width: 200px">Durum</th>
+            <th style="width: 2%">#</th>
+            <th style="width: 35%">Etkinlik Adı</th>
+            <th style="width: 35%">Kullanıcı</th>
+            <th style="width: 5%" class="text-center">Durum</th>
+            <th style="width: 20%"></th>
+
         </tr>
     </thead>
     <tbody>
@@ -15,7 +21,15 @@
             <tr>
                 <td>@(i+1)</td>
                 <td>@Model[i].EventName</td>
-                <td>
+                @if (Model[i].User is null)
+                {
+                    <td></td>
+                }
+                else{
+                    <td>@Model[i].User.FirstName</td>
+                }
+                <td class="text-center">
+                    <h5>
                 @switch (Model[i].IsApproved)
                 {
                     case true:
@@ -28,15 +42,15 @@
                     <span class="badge bg-primary">Bekliyor</span>
                         break;
                 }
-                @if(Model[i].IsApproved is null)
-                {
-                    <button type="button" class="btn btn-success btn-sm">
-                        <i class="fas fa-check"></i>
-                    </button>
-                }
-                    
+                </h5>
+                </td>
+                <td class="text-right">
+                      <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> İncele</button>
+                      <button type="button" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Onayla</button>
+                      <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Reddet</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+</section>

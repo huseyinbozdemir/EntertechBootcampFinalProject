@@ -67,11 +67,29 @@ namespace EntertechFP.UI.Controllers.Admin
             return RedirectToAction("PendingEvents");
         }
         [HttpGet]
+        public IActionResult Events()
+        {
+            var request = requestHelper.Action<List<EventDto>>("event/?include=1", ActionType.Get, null);
+            var model = request.Result.Data;
+            return View(model);
+        }
+        [HttpGet]
         public IActionResult PendingEvents()
         {
-            var model = requestHelper.Action<List<EventDto>>("event/?include=0&pending=1", ActionType.Get, null);
-            var result = model.Result.Data;
-            return View(result);
+            var request = requestHelper.Action<List<EventDto>>("event/?include=1&pending=1", ActionType.Get, null);
+            var model = request.Result.Data;
+            return View(model);
+        }
+        [HttpGet] 
+        public IActionResult EventDetails(int? eventId)
+        {
+            if (eventId is null)
+                return RedirectToAction("Events");
+            var request = requestHelper.Action<EventDto>($"event/{eventId}?include=1", ActionType.Get, null);
+            var model = request.Result.Data;
+            if (model is null)
+                return RedirectToAction("Events");
+            return View(model);
         }
     }
 }
