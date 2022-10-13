@@ -31,6 +31,14 @@ namespace EntertechFP.API.Controllers
                 return new BaseResponse<Entegrator>("Entegratör bulunamadı.");
             return new BaseResponse<Entegrator>(data);
         }
+        [HttpGet("{id}")]
+        public BaseResponse<Entegrator> Get(int id)
+        {
+            var data = entegratorService.Get(e=>e.EntegratorId==id);
+            if (data is null)
+                return new BaseResponse<Entegrator>("Entegratör bulunamadı.");
+            return new BaseResponse<Entegrator>(data);
+        }
         [HttpGet]
         public BaseResponse<List<Entegrator>> GetAll()
             => new BaseResponse<List<Entegrator>>(entegratorService.GetAll());

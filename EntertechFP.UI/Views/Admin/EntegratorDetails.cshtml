@@ -1,0 +1,36 @@
+﻿@using EntertechFP.UI.Models.Entitities
+@model EntegratorDto
+
+<section class="content">
+    <div class="content-header">
+        <h1>Entegratör Detayları</h1>
+    </div>
+    <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-search"></i>
+                    Entegratör Detayları
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="entegratorName">Firma İsmi</label>
+                    <input type="text" id="entegratorName" class="form-control" readonly value="@Model.EntegratorName">
+                </div>
+                <div class="form-group">
+                    <label for="domainName">Firma Sitesi</label>
+                    <input type="text" id="domainName" class="form-control" readonly value="@Model.DomainName">
+                </div>
+                <div class="form-group">
+                    <label for="emailAddress">E-Mail Adresi</label>
+                    <input type="text" id="emailAddress" class="form-control" readonly value="@Model.EmailAdress">
+                </div>
+                <div class="form-group">
+                    <label for="apiKey">Entegratör Api Key</label>
+                    <input type="text" id="apiKey" class="form-control" readonly value="@Model.ApiKey">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

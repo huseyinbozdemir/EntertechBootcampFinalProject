@@ -12,8 +12,4 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\EntertechFP.EL\EntertechFP.EL.csproj" />
-  </ItemGroup>
-
 </Project>

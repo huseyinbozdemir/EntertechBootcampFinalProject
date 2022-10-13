@@ -1,0 +1,80 @@
+﻿@using EntertechFP.UI.Models.Entitities
+@model List<EntegratorDto>
+
+<section class="content">
+    <div class="content-header">
+        <h1>Entegratör Firmalar</h1>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: 2%">#</th>
+                <th style="width: 40%">Firma Adı</th>
+                <th style="width: 46%">Firma Sitesi</th>
+                <th style="width: 12%"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@Model[i].EntegratorName</td>
+                    <td>@Model[i].DomainName</td>
+                    <td class="text-right">
+                        <a class="btn btn-outline-primary btn-sm" href="@Url.Action("EntegratorDetails","Admin",new {entegratorId=Model[i].EntegratorId})">
+                            <i class="fas fa-search">
+                            </i>
+                            İncele
+                        </a>
+                        <a class="btn btn-outline-danger btn-sm" onclick="Remove(@Model[i].EntegratorId)">
+                            <i class="fas fa-trash">
+                            </i>
+                            Sil
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+@section Scripts{
+    <script type="text/javascript">
+        function Remove(id) {
+            Swal.fire({
+                title: 'Emin misiniz?',
+                text: "Değişiklikler geri alınmayacaktır!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet',
+                cancelButtonText: 'Hayır',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/Admin/RemoveEntegrator?EntegratorId=" + id;
+                }
+            })
+        }
+        $(document).ready(function () {
+            var msg = "@ViewBag.Alert";
+            if (msg.toLowerCase() == "false") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata...',
+                    text: 'Entegratör silinemedi!',
+                });
+            }
+            else if (msg.toLowerCase() == "true") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bilgi...',
+                    text: 'Entegratör başarıyla silindi!',
+                });
+            }
+        });
+    </script>
+}

@@ -1,10 +1,8 @@
-﻿using EntertechFP.EL.Concrete;
-using EntertechFP.UI.Models.Entitities;
+﻿using EntertechFP.UI.Models.Entitities;
 using EntertechFP.UI.Models.ViewModels;
 using EntertechFP.UI.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 
 namespace EntertechFP.UI.Controllers.Admin
@@ -184,6 +182,37 @@ namespace EntertechFP.UI.Controllers.Admin
             if (model is null)
                 return RedirectToAction(nameof(Users));
             return View(model);
+        }
+        #endregion
+
+        #region Entegrator Section
+        public IActionResult Entegrators(bool? success)
+        {
+            var request = requestHelper.Action<List<EntegratorDto>>("entegrator",ActionType.Get, null);
+            var result = request.Result.Data;
+            if(success is not null)
+            {
+                ViewBag.Alert = success;
+            }
+            return View(result);
+        }
+        public IActionResult EntegratorDetails(int? entegratorId)
+        {
+            if (entegratorId is null)
+                RedirectToAction(nameof(Entegrators));
+            var request = requestHelper.Action<EntegratorDto>($"entegrator/{entegratorId}", ActionType.Get, null);
+            var result = request.Result.Data;
+            if (result is null)
+                return RedirectToAction(nameof(Entegrators));
+            return View(result);
+        }
+        public IActionResult RemoveEntegrator(int? entegratorId)
+        {
+            if (entegratorId is null)
+                RedirectToAction(nameof(Entegrators));
+            var request = requestHelper.Action<EntegratorDto>($"entegrator/{entegratorId}", ActionType.Delete, null);
+            var result = request.Result.Success;
+            return RedirectToAction(nameof(Entegrators), "Admin", new { success = result });
         }
         #endregion
     }

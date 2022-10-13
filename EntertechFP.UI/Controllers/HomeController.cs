@@ -1,7 +1,4 @@
-﻿using EntertechFP.EL.Concrete;
-using EntertechFP.UI.Models.Entitities;
-using EntertechFP.UI.Utils;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace EntertechFP.UI.Controllers
 {
