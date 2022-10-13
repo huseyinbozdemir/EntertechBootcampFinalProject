@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Nw95K2bGnyI5Ki9cZ/l6xJo5jnbDWQppMe/FrCgQrVs=",
+  "Hash": "fyd6LAf8OF4Fvy5s5S2I2Rm5h32EZp2KcGYqlfsh3gk=",
   "Source": "EntertechFP.UI",
   "BasePath": "_content/EntertechFP.UI",
   "Mode": "Default",
@@ -814,23 +814,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\adminlte.min.js.map"
-    },
-    {
-      "Identity": "C:\\Users\\Hüseyin Bozdemir\\source\\repos\\Entertech Bootcamp\\EntertechFP\\EntertechFP.UI\\wwwroot\\js\\demo.js",
-      "SourceId": "EntertechFP.UI",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Hüseyin Bozdemir\\source\\repos\\Entertech Bootcamp\\EntertechFP\\EntertechFP.UI\\wwwroot\\",
-      "BasePath": "_content/EntertechFP.UI",
-      "RelativePath": "js/demo.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\demo.js"
     },
     {
       "Identity": "C:\\Users\\Hüseyin Bozdemir\\source\\repos\\Entertech Bootcamp\\EntertechFP\\EntertechFP.UI\\wwwroot\\js\\pages\\dashboard.js",

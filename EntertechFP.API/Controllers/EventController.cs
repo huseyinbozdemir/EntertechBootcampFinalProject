@@ -68,11 +68,13 @@ namespace EntertechFP.API.Controllers
             return new BaseResponse<Event>("Son katılım tarihine 5 günden az kaldığı için işlem gerçekleştirilemedi.");
         }
         [HttpDelete("{id}")]
-        public BaseResponse<Event> DeleteEvent(int id)
+        public BaseResponse<Event> DeleteEvent(int id, int admin = 0)
         {
             var @event = Get(id).Data;
+            if (@event is null)
+                return new BaseResponse<Event>("Etkinlik bulunamadı.");
             var days = (@event.LastAttendDate - DateTime.Now).TotalDays;
-            if (days >= 5)
+            if (days >= 5 || admin == 1)
             {
                 eventService.Delete(@event);
                 return new BaseResponse<Event>(true);
@@ -89,8 +91,8 @@ namespace EntertechFP.API.Controllers
             eventService.Update(data);
             return new BaseResponse<Event>(data);
         }
-        [HttpPatch("Cancel/{id}")]
-        public BaseResponse<Event> Cancel(int id)
+        [HttpPatch("Reject/{id}")]
+        public BaseResponse<Event> Reject(int id)
         {
             var data = Get(id).Data;
             if (data is null)

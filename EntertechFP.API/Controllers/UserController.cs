@@ -31,16 +31,21 @@ namespace EntertechFP.API.Controllers
             return new BaseResponse<User>(data);
         }
         [HttpGet("{id}")]
-        public BaseResponse<User> Get(int id)
+        public BaseResponse<User> Get(int id, int include = 0)
         {
-            var data = userService.Get(u => u.UserId == id);
+            var data =
+                (include == 0)
+                ? userService.Get(u => u.UserId == id)
+                : userService.Get(u => u.UserId == id, u => u.Events, u => u.Notifications);
             if (data is null)
                 return new BaseResponse<User>("Kullanıcı bulunamadı");
             return new BaseResponse<User>(data);
         }
         [HttpGet]
-        public BaseResponse<List<User>> GetAll()
-             => new BaseResponse<List<User>>(userService.GetAll());
+        public BaseResponse<List<User>> GetAll(int include = 0)
+             => (include == 0)
+                ? new BaseResponse<List<User>>(userService.GetAll())
+                : new BaseResponse<List<User>>(userService.GetAll(null, u => u.Events));
         [HttpPost]
         public BaseResponse<User> Add([FromBody] User user)
         {

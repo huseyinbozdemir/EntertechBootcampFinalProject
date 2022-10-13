@@ -26,8 +26,8 @@
                     <td></td>
                 }
                 else{
-                    <td>@Model[i].User.FirstName</td>
-                }
+                        <td>@(Model[i].User.FirstName + ' ' + Model[i].User.LastName)</td>
+                    }
                 <td class="text-center">
                     <h5>
                 @switch (Model[i].IsApproved)
@@ -45,12 +45,78 @@
                 </h5>
                 </td>
                 <td class="text-right">
-                      <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> İncele</button>
-                      <button type="button" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Onayla</button>
-                      <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Reddet</button>
+                        <a class="btn btn-outline-primary btn-sm" href="@Url.Action("EventDetails","Admin",new {eventid=Model[i].EventId})">
+                            <i class="fas fa-search">
+                            </i>
+                            İncele
+                        </a>
+                        <a class="btn btn-outline-success btn-sm" onclick="Accept(@Model[i].EventId)">
+                            <i class="fas fa-check">
+                            </i>
+                            Onayla
+                        </a>
+                        <a class="btn btn-outline-danger btn-sm" onclick="Reject(@Model[i].EventId)">
+                            <i class="fas fa-trash">
+                            </i>
+                            Reddet
+                        </a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 </section>
+
+@section Scripts{
+    <script type="text/javascript">
+        function Accept(id) {
+            Swal.fire({
+                title: 'Emin misiniz?',
+                text: "Değişiklikler geri alınmayacaktır!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet',
+                cancelButtonText: 'Hayır',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/Admin/AcceptEvent?EventId=" + id;
+                }
+            })
+        }
+        function Reject(id) {
+            Swal.fire({
+                title: 'Emin misiniz?',
+                text: "Değişiklikler geri alınmayacaktır!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet',
+                cancelButtonText: 'Hayır',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/Admin/RejectEvent?EventId=" + id;
+                }
+            })
+        }
+        $(document).ready(function () {
+            var alert = "@ViewBag.Alert";
+            if (alert.toLowerCase() == "false") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata...',
+                    text: 'İşlem gerçekleştirilemedi!',
+                });
+            }
+            else if (alert.toLowerCase() == "true") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bilgi...',
+                    text: '@Html.Raw(ViewBag.Status)',
+                });
+            }
+        });
+    </script>
+}

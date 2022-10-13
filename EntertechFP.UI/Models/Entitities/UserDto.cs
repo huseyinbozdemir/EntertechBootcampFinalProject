@@ -8,7 +8,7 @@
         public string EmailAddress { get; set; }
         public string Password { get; set; }
 
-        public ICollection<EventDto> Events { get; set; }
-        public ICollection<NotificationDto> Notifications { get; set; }
+        public List<EventDto> Events { get; set; }
+        public List<NotificationDto> Notifications { get; set; }
     }
 }

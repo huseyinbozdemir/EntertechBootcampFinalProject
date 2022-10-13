@@ -1,13 +1,15 @@
-﻿using EntertechFP.UI.Models.Entitities;
+﻿using EntertechFP.EL.Concrete;
+using EntertechFP.UI.Models.Entitities;
 using EntertechFP.UI.Models.ViewModels;
 using EntertechFP.UI.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 
 namespace EntertechFP.UI.Controllers.Admin
 {
-    [Authorize(Roles="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly IConfiguration configuration;
@@ -25,11 +27,17 @@ namespace EntertechFP.UI.Controllers.Admin
             return value;
         }
         [HttpGet]
+        public IActionResult Index()
+        {
+            return RedirectToAction(nameof(PendingEvents));
+        }
+        #region Login&Logout Section
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult Login()
         {
             if (HttpContext.Request.Cookies["adm_session"] is not null)
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             return View();
         }
 
@@ -47,7 +55,7 @@ namespace EntertechFP.UI.Controllers.Admin
                     new Claim(ClaimTypes.Role,"Admin")
                 };
                 cookieHelper.SignIn(claims, model.RememberMe, this);
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             else
             {
@@ -59,37 +67,124 @@ namespace EntertechFP.UI.Controllers.Admin
         public IActionResult Logout()
         {
             cookieHelper.SignOut(this);
-            return RedirectToAction("Login");
+            return RedirectToAction(nameof(Login));
         }
+        #endregion
+
+        #region Event Section
         [HttpGet]
-        public IActionResult Index()
-        {
-            return RedirectToAction("PendingEvents");
-        }
-        [HttpGet]
-        public IActionResult Events()
+        public IActionResult Events(bool? success)
         {
             var request = requestHelper.Action<List<EventDto>>("event/?include=1", ActionType.Get, null);
             var model = request.Result.Data;
+            if (success is not null)
+                ViewBag.Alert = success;
             return View(model);
         }
         [HttpGet]
-        public IActionResult PendingEvents()
+        public IActionResult PendingEvents(bool? success, int? status)
         {
             var request = requestHelper.Action<List<EventDto>>("event/?include=1&pending=1", ActionType.Get, null);
             var model = request.Result.Data;
+            if(success is not null && status is not null)
+            {
+                ViewBag.Alert = success;
+                ViewBag.Status = (status == 0)?"Etkinlik reddedildi.":"Etkinlik onaylandı.";
+            }
             return View(model);
         }
-        [HttpGet] 
+        [HttpGet]
         public IActionResult EventDetails(int? eventId)
         {
             if (eventId is null)
-                return RedirectToAction("Events");
+                return RedirectToAction(nameof(Events));
             var request = requestHelper.Action<EventDto>($"event/{eventId}?include=1", ActionType.Get, null);
             var model = request.Result.Data;
             if (model is null)
-                return RedirectToAction("Events");
+                return RedirectToAction(nameof(Events));
             return View(model);
         }
+        [HttpGet]
+        public IActionResult AcceptEvent(int? eventId)
+        {
+            if (eventId is null)
+                return RedirectToAction(nameof(PendingEvents));
+            var request = requestHelper.Action<EventDto>($"event/accept/{eventId}", ActionType.Patch, null);
+            var success = request.Result.Success;
+            if (success)
+            {
+                NotificationDto dto = new NotificationDto
+                {
+                    Description = $"{request.Result.Data.EventName} isimli etkinliğiniz kabul edildi.",
+                    IsSeen=false,
+                    UserId=request.Result.Data.UserId.Value,
+                    NotificationDate=DateTime.Now
+                };
+                var notificationRequest = requestHelper.Action<NotificationDto>("notification", ActionType.Post, dto);
+            }
+            return RedirectToAction(nameof(PendingEvents), "Admin", new { success = success, status=1 });
+        }
+        [HttpGet]
+        public IActionResult RejectEvent(int? eventId)
+        {
+            if (eventId is null)
+                return RedirectToAction(nameof(PendingEvents));
+            var request = requestHelper.Action<EventDto>($"event/reject/{eventId}", ActionType.Patch, null);
+            var success = request.Result.Success;
+            if (success)
+            {
+                NotificationDto dto = new NotificationDto
+                {
+                    Description = $"{request.Result.Data.EventName} isimli etkinliğiniz reddedildi.",
+                    IsSeen = false,
+                    UserId = request.Result.Data.UserId.Value,
+                    NotificationDate = DateTime.Now
+                };
+                var notificationRequest = requestHelper.Action<NotificationDto>("notification", ActionType.Post, dto);
+            }
+            return RedirectToAction(nameof(PendingEvents), "Admin", new { success = success, status = 0 });
+        }
+        [HttpGet]
+        public IActionResult RemoveEvent(int? eventId)
+        {
+            if (eventId is null)
+                return RedirectToAction(nameof(Events));
+            var request = requestHelper.Action<EventDto>($"event/{eventId}?admin=1", ActionType.Delete, null);
+            var success = request.Result.Success;
+            return RedirectToAction(nameof(Events), "Admin", new { success = success });
+        }
+        #endregion
+
+        #region User Section
+        [HttpGet]
+        public IActionResult Users(bool? success)
+        {
+            var request = requestHelper.Action<List<UserDto>>("user?include=1", ActionType.Get, null);
+            var model = request.Result.Data;
+            if (success is not null)
+                ViewBag.Alert = success;
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult RemoveUser(int? userId)
+        {
+            if (userId is null)
+                return RedirectToAction(nameof(Users));
+            var request = requestHelper.Action<UserDto>($"user/{userId}", ActionType.Delete, null);
+            var success = request.Result.Success;
+            return RedirectToAction(nameof(Users), "Admin", new { success = success });
+        }
+        [HttpGet]
+        public IActionResult UserDetails(int? userId)
+        {
+            if (userId is null)
+                return RedirectToAction(nameof(Users));
+            var request = requestHelper.Action<UserDto>($"user/{userId}?include=1", ActionType.Get, null);
+            var model = request.Result.Data;
+            if (model is null)
+                return RedirectToAction(nameof(Users));
+            return View(model);
+        }
+        #endregion
     }
 }

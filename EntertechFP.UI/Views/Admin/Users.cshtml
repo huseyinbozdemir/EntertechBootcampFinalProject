@@ -1,0 +1,83 @@
+﻿@using EntertechFP.UI.Models.Entitities
+@model List<UserDto>
+
+<section class="content">
+    <div class="content-header">
+        <h1>Kullanıcılar</h1>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: 2%">#</th>
+                <th style="width: 20%">İsim</th>
+                <th style="width: 20%">Soyisim</th>
+                <th style="width: 20%" class="text-center">Etkinlik Sayısı</th>
+                <th style="width: 12%"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@Model[i].FirstName</td>
+                    <td>@Model[i].LastName</td>
+                    <td class="text-center">
+                       @Model[i].Events.Count
+                    </td>
+                    <td class="text-right">
+                        <a class="btn btn-outline-primary btn-sm" href="@Url.Action("UserDetails","Admin",new {userid=Model[i].UserId})">
+                            <i class="fas fa-search">
+                            </i>
+                            İncele
+                        </a>
+                        <a class="btn btn-outline-danger btn-sm" onclick="Remove(@Model[i].UserId)">
+                            <i class="fas fa-trash">
+                            </i>
+                            Sil
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+@section Scripts{
+    <script type="text/javascript">
+         function Remove(id) {
+                Swal.fire({
+                    title: 'Emin misiniz?',
+                    text: "Değişiklikler geri alınmayacaktır!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Evet',
+                    cancelButtonText:   'Hayır',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Admin/RemoveUser?UserId=" + id;
+                    }
+                })
+            }
+         $(document).ready(function(){
+            var msg = "@ViewBag.Alert";
+            if(msg.toLowerCase() == "false"){
+                Swal.fire({
+                icon: 'error',
+                title: 'Hata...',
+                text: 'Kullanıcı silinemedi!',
+                });
+            }
+            else if(msg.toLowerCase()=="true"){
+                Swal.fire({
+                icon: 'success',
+                title: 'Bilgi...',
+                text: 'Kullanıcı başarıyla silindi!',
+                });
+            }
+         });
+        </script>
+}
