@@ -4,17 +4,23 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+builder.Services.AddAuthentication(options => options.DefaultScheme = "admin_scheme")
+    .AddCookie("admin_scheme", options =>
     {
-        options.LoginPath = "/admin/login";
+        options.LoginPath = "/login";
         options.Cookie.Name = "admin_session";
+        options.AccessDeniedPath = "/login";
+        options.LogoutPath = "/login";
 
-    })
-    .AddCookie(options=>
+    });
+builder.Services.AddAuthentication(options => options.DefaultScheme = "user_scheme")
+    .AddCookie("user_scheme", options =>
     {
-        options.LoginPath = "/admin/login";
+        options.LoginPath = "/login";
         options.Cookie.Name = "user_session";
+        options.AccessDeniedPath = "/login";
+        options.LogoutPath = "/login";
+
     });
 builder.Services.AddScoped<CookieHelper>();
 builder.Services.AddScoped(x => new RequestHelper(builder.Configuration.GetSection("ApiKey").Value));

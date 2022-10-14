@@ -7,7 +7,7 @@ namespace EntertechFP.UI.Utils
 {
     public class CookieHelper
     {
-        public async void SignIn(List<Claim> claims, bool remember, Controller controller)
+        public async void SignIn(List<Claim> claims, bool remember, HttpContext context, string scheme)
         {
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var authProps = new AuthenticationProperties() { IsPersistent = true };
@@ -15,12 +15,12 @@ namespace EntertechFP.UI.Utils
                 authProps.ExpiresUtc = DateTimeOffset.UtcNow.AddDays(15);
             else
                 authProps.ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1);
-            await controller.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
+            await context.SignInAsync(scheme, new ClaimsPrincipal(claimsIdentity), authProps);
         }
 
-        public async void SignOut(Controller controller)
+        public async void SignOut(HttpContext context, string scheme)
         {
-            await controller.HttpContext.SignOutAsync();
+            await context.SignOutAsync(scheme);
         }
     }
 }

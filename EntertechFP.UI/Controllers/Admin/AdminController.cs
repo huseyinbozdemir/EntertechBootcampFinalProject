@@ -1,35 +1,31 @@
 ﻿using EntertechFP.UI.Models.Entitities;
-using EntertechFP.UI.Models.ViewModels;
 using EntertechFP.UI.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace EntertechFP.UI.Controllers.Admin
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(AuthenticationSchemes = "admin_scheme")]
     public class AdminController : Controller
     {
-        private readonly IConfiguration configuration;
         private readonly CookieHelper cookieHelper;
         private readonly RequestHelper requestHelper;
-        public AdminController(IConfiguration configuration, CookieHelper cookieHelper, RequestHelper requestHelper)
+        public AdminController(CookieHelper cookieHelper, RequestHelper requestHelper)
         {
-            this.configuration = configuration;
             this.cookieHelper = cookieHelper;
             this.requestHelper = requestHelper;
-        }
-        private string GetConfigurationInfo(string key)
-        {
-            var value = configuration.GetSection(key).Get<string>();
-            return value;
         }
         [HttpGet]
         public IActionResult Index()
         {
             return RedirectToAction(nameof(PendingEvents));
         }
-
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            cookieHelper.SignOut(HttpContext, "admin_scheme");
+            return RedirectToAction("Login", "Index");
+        }
         #region Event Section
         [HttpGet]
         public IActionResult Events(bool? success)
