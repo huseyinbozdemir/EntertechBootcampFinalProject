@@ -9,8 +9,7 @@
       "EntertechFP.UI/1.0.0": {
         "dependencies": {
           "FluentValidation": "11.2.2",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.9",
-          "Newtonsoft.Json": "13.0.1"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.9"
         },
         "runtime": {
           "EntertechFP.UI.dll": {}

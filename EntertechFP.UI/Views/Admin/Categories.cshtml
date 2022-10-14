@@ -5,12 +5,13 @@
     <div class="content-header">
         <h1>Kategoriler</h1>
     </div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoryAddModal">Yeni Kategori Ekle</button>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th style="width: 2%">#</th>
                 <th style="width: 41%">Kategori Adı</th>
-                <th style="width: 33%" class="text-center">Etkinlik Sayısı</th>
+                <th style="width: 33%" class="text-center" >Etkinlik Sayısı</th>
                 <th style="width: 25%"></th>
 
             </tr>
@@ -39,13 +40,38 @@
                             </i>
                             Sil
                         </a>
-
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </section>
+
+<div class="modal fade" id="categoryAddModal" tabindex="-1" role="dialog" aria-labelledby="categoryAddModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kategori Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="@Url.Action("AddCategory","Admin")">
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.Hidden("CategoryId")
+                        <label for="recipient-name" class="col-form-label">Kategori İsmi:</label>
+                        <input type="text" class="form-control" id="CategoryName" name="CategoryName">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="categoryUpdateModal" tabindex="-1" role="dialog" aria-labelledby="categoryUpdateModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

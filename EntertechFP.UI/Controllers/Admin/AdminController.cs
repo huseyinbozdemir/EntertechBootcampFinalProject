@@ -49,10 +49,8 @@ namespace EntertechFP.UI.Controllers.Admin
             return View(model);
         }
         [HttpGet]
-        public IActionResult EventDetails(int? eventId)
+        public IActionResult EventDetails(int eventId)
         {
-            if (eventId is null)
-                return RedirectToAction(nameof(Events));
             var request = requestHelper.Action<EventDto>($"event/{eventId}?include=1", ActionType.Get, null);
             var model = request.Result.Data;
             if (model is null)
@@ -60,10 +58,8 @@ namespace EntertechFP.UI.Controllers.Admin
             return View(model);
         }
         [HttpGet]
-        public IActionResult AcceptEvent(int? eventId)
+        public IActionResult AcceptEvent(int eventId)
         {
-            if (eventId is null)
-                return RedirectToAction(nameof(PendingEvents));
             var request = requestHelper.Action<EventDto>($"event/accept/{eventId}", ActionType.Patch, null);
             var success = request.Result.Success;
             if (success)
@@ -81,10 +77,8 @@ namespace EntertechFP.UI.Controllers.Admin
             return RedirectToAction(nameof(PendingEvents), "Admin", new { success = success });
         }
         [HttpGet]
-        public IActionResult RejectEvent(int? eventId)
+        public IActionResult RejectEvent(int eventId)
         {
-            if (eventId is null)
-                return RedirectToAction(nameof(PendingEvents));
             var request = requestHelper.Action<EventDto>($"event/reject/{eventId}", ActionType.Patch, null);
             var success = request.Result.Success;
             if (success)
@@ -102,10 +96,8 @@ namespace EntertechFP.UI.Controllers.Admin
             return RedirectToAction(nameof(PendingEvents), "Admin", new { success = success });
         }
         [HttpGet]
-        public IActionResult RemoveEvent(int? eventId)
+        public IActionResult RemoveEvent(int eventId)
         {
-            if (eventId is null)
-                return RedirectToAction(nameof(Events));
             var request = requestHelper.Action<EventDto>($"event/{eventId}?admin=1", ActionType.Delete, null);
             var success = request.Result.Success;
             return RedirectToAction(nameof(Events), "Admin", new { success = success });
@@ -123,19 +115,15 @@ namespace EntertechFP.UI.Controllers.Admin
             return View(model);
         }
         [HttpGet]
-        public IActionResult RemoveUser(int? userId)
+        public IActionResult RemoveUser(int userId)
         {
-            if (userId is null)
-                return RedirectToAction(nameof(Users));
             var request = requestHelper.Action<UserDto>($"user/{userId}", ActionType.Delete, null);
             var success = request.Result.Success;
             return RedirectToAction(nameof(Users), "Admin", new { success = success });
         }
         [HttpGet]
-        public IActionResult UserDetails(int? userId)
+        public IActionResult UserDetails(int userId)
         {
-            if (userId is null)
-                return RedirectToAction(nameof(Users));
             var request = requestHelper.Action<UserDto>($"user/{userId}?include=1", ActionType.Get, null);
             var model = request.Result.Data;
             if (model is null)
@@ -155,20 +143,16 @@ namespace EntertechFP.UI.Controllers.Admin
             }
             return View(result);
         }
-        public IActionResult EntegratorDetails(int? entegratorId)
+        public IActionResult EntegratorDetails(int entegratorId)
         {
-            if (entegratorId is null)
-                RedirectToAction(nameof(Entegrators));
             var request = requestHelper.Action<EntegratorDto>($"entegrator/{entegratorId}", ActionType.Get, null);
             var result = request.Result.Data;
             if (result is null)
                 return RedirectToAction(nameof(Entegrators));
             return View(result);
         }
-        public IActionResult RemoveEntegrator(int? entegratorId)
+        public IActionResult RemoveEntegrator(int entegratorId)
         {
-            if (entegratorId is null)
-                RedirectToAction(nameof(Entegrators));
             var request = requestHelper.Action<EntegratorDto>($"entegrator/{entegratorId}", ActionType.Delete, null);
             var result = request.Result.Success;
             return RedirectToAction(nameof(Entegrators), "Admin", new { success = result });
@@ -190,15 +174,41 @@ namespace EntertechFP.UI.Controllers.Admin
         }
 
         [HttpPost]
+        public IActionResult AddCategory(CategoryDto category)
+        {
+            var request = requestHelper.Action("category", ActionType.Post, category);
+            var success = request.Result.Success;
+            TempData["success"] = success;
+            if (success)
+                TempData["message"] = "Kategori başarıyla eklendi.";
+            else
+                TempData["message"] = "Kategori eklenemedi.";
+            return RedirectToAction(nameof(Categories), "Admin", new { success = success });
+        }
+
+        [HttpPost]
         public IActionResult UpdateCategory(CategoryDto category)
         {
             var request = requestHelper.Action($"category/{category.CategoryId}", ActionType.Patch, category);
             var success = request.Result.Success;
             TempData["success"] = success;
             if (success)
-                TempData["message"] = "Kategori başarıyla güncellendi";
+                TempData["message"] = "Kategori başarıyla güncellendi.";
             else
                 TempData["message"] = "Kategori güncellenemedi.";
+            return RedirectToAction(nameof(Categories), "Admin", new { success = success });
+        }
+
+        [HttpGet]
+        public IActionResult RemoveCategory(int categoryId)
+        {
+            var request = requestHelper.Action<CategoryDto>($"category/{categoryId}", ActionType.Delete, null);
+            var success = request.Result.Success;
+            TempData["success"] = success;
+            if (success)
+                TempData["message"] = "Kategori başarıyla silindi.";
+            else
+                TempData["message"] = "Kategori silinemedi.";
             return RedirectToAction(nameof(Categories), "Admin", new { success = success });
         }
         #endregion
