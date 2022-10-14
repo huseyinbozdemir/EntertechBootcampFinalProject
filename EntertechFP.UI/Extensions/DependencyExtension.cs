@@ -2,7 +2,7 @@
 
 namespace EntertechFP.UI.Extensions
 {
-    public static class DependencieExtension
+    public static class DependencyExtension
     {
         public static IServiceCollection AddDependencies(this IServiceCollection services, ConfigurationManager configuration)
         {

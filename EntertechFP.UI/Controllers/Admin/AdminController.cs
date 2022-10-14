@@ -37,14 +37,14 @@ namespace EntertechFP.UI.Controllers.Admin
             return View(model);
         }
         [HttpGet]
-        public IActionResult PendingEvents(bool? success, int? status)
+        public IActionResult PendingEvents(bool? success)
         {
             var request = requestHelper.Action<List<EventDto>>("event/?include=1&pending=1", ActionType.Get, null);
             var model = request.Result.Data;
-            if(success is not null && status is not null)
+            if (success is not null)
             {
                 ViewBag.Alert = success;
-                ViewBag.Status = (status == 0)?"Etkinlik reddedildi.":"Etkinlik onaylandı.";
+                ViewBag.Status = TempData["message"];
             }
             return View(model);
         }
@@ -71,13 +71,14 @@ namespace EntertechFP.UI.Controllers.Admin
                 NotificationDto dto = new NotificationDto
                 {
                     Description = $"{request.Result.Data.EventName} isimli etkinliğiniz kabul edildi.",
-                    IsSeen=false,
-                    UserId=request.Result.Data.UserId.Value,
-                    NotificationDate=DateTime.Now
+                    IsSeen = false,
+                    UserId = request.Result.Data.UserId.Value,
+                    NotificationDate = DateTime.Now
                 };
                 var notificationRequest = requestHelper.Action<NotificationDto>("notification", ActionType.Post, dto);
             }
-            return RedirectToAction(nameof(PendingEvents), "Admin", new { success = success, status=1 });
+            TempData["message"] = "Etkinlik onaylandı.";
+            return RedirectToAction(nameof(PendingEvents), "Admin", new { success = success });
         }
         [HttpGet]
         public IActionResult RejectEvent(int? eventId)
@@ -97,7 +98,8 @@ namespace EntertechFP.UI.Controllers.Admin
                 };
                 var notificationRequest = requestHelper.Action<NotificationDto>("notification", ActionType.Post, dto);
             }
-            return RedirectToAction(nameof(PendingEvents), "Admin", new { success = success, status = 0 });
+            TempData["message"] = "Etkinlik reddedildi.";
+            return RedirectToAction(nameof(PendingEvents), "Admin", new { success = success });
         }
         [HttpGet]
         public IActionResult RemoveEvent(int? eventId)
@@ -145,9 +147,9 @@ namespace EntertechFP.UI.Controllers.Admin
         #region Entegrator Section
         public IActionResult Entegrators(bool? success)
         {
-            var request = requestHelper.Action<List<EntegratorDto>>("entegrator",ActionType.Get, null);
+            var request = requestHelper.Action<List<EntegratorDto>>("entegrator", ActionType.Get, null);
             var result = request.Result.Data;
-            if(success is not null)
+            if (success is not null)
             {
                 ViewBag.Alert = success;
             }
@@ -170,6 +172,34 @@ namespace EntertechFP.UI.Controllers.Admin
             var request = requestHelper.Action<EntegratorDto>($"entegrator/{entegratorId}", ActionType.Delete, null);
             var result = request.Result.Success;
             return RedirectToAction(nameof(Entegrators), "Admin", new { success = result });
+        }
+        #endregion
+
+        #region Category Section
+        [HttpGet]
+        public IActionResult Categories(bool? success)
+        {
+            var request = requestHelper.Action<List<CategoryDto>>("category?include=1", ActionType.Get, null);
+            var categories = request.Result.Data;
+            if (success is not null)
+            {
+                ViewBag.Alert = success;
+                ViewBag.Message = TempData["message"];
+            }
+            return View(categories);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCategory(CategoryDto category)
+        {
+            var request = requestHelper.Action($"category/{category.CategoryId}", ActionType.Patch, category);
+            var success = request.Result.Success;
+            TempData["success"] = success;
+            if (success)
+                TempData["message"] = "Kategori başarıyla güncellendi";
+            else
+                TempData["message"] = "Kategori güncellenemedi.";
+            return RedirectToAction(nameof(Categories), "Admin", new { success = success });
         }
         #endregion
     }

@@ -1,6 +1,6 @@
 ﻿using EntertechFP.UI.Models.Responses;
-using Newtonsoft.Json;
 using System.Text;
+using System.Text.Json;
 
 namespace EntertechFP.UI.Utils
 {
@@ -30,7 +30,7 @@ namespace EntertechFP.UI.Utils
                     url = $"http://localhost:38734/api/{url}";
                     client.DefaultRequestHeaders.Add("ApiKey", apiKey);
                     if (actionType != ActionType.Get && actionType != ActionType.Delete)
-                        serialized = JsonConvert.SerializeObject(data);
+                        serialized = JsonSerializer.Serialize(data);
                     switch (actionType)
                     {
                         case ActionType.Get:
@@ -50,7 +50,7 @@ namespace EntertechFP.UI.Utils
                             break;
                     }
                     var content = response.Content.ReadAsStringAsync().Result;
-                    var obj = JsonConvert.DeserializeObject<BaseResponseDto<T>>(content);
+                    var obj = JsonSerializer.Deserialize<BaseResponseDto<T>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                     return obj;
                 }
                 catch (Exception ex)

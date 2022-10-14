@@ -1,4 +1,6 @@
-﻿namespace EntertechFP.UI.Models.Entitities
+﻿using System.Text.Json.Serialization;
+
+namespace EntertechFP.UI.Models.Entitities
 {
     public class EventDto
     {
@@ -16,8 +18,11 @@
         public bool IsTicketed { get; set; }
         public bool? IsApproved { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public CategoryDto? Category { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public CityDto? City { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public UserDto? User { get; set; }
     }
 }

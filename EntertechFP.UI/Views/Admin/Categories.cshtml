@@ -1,0 +1,120 @@
+﻿@using EntertechFP.UI.Models.Entitities
+@model List<CategoryDto>
+
+<section class="content">
+    <div class="content-header">
+        <h1>Kategoriler</h1>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: 2%">#</th>
+                <th style="width: 41%">Kategori Adı</th>
+                <th style="width: 33%" class="text-center">Etkinlik Sayısı</th>
+                <th style="width: 25%"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@Model[i].CategoryName</td>
+                    <td class="text-center">@Model[i].Events.Count</td>
+    
+                    <td class="text-right">
+                        <a class="btn btn-outline-primary btn-sm" href="@Url.Action("CategoryDetails","Admin",new {categoryId=Model[i].CategoryId})">
+                            <i class="fas fa-search">
+                            </i>
+                            İncele
+                        </a>
+                        <button class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#categoryUpdateModal" data-id="@Model[i].CategoryId" data-name="@Model[i].CategoryName">
+                            <i class="fas fa-edit">
+                            </i>
+                            Güncelle
+                        </button>
+                        <a class="btn btn-outline-danger btn-sm" onclick="Remove(@Model[i].CategoryId)">
+                            <i class="fas fa-trash">
+                            </i>
+                            Sil
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+<div class="modal fade" id="categoryUpdateModal" tabindex="-1" role="dialog" aria-labelledby="categoryUpdateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kategoriyi Güncelle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+           <form method="post" action="@Url.Action("UpdateCategory","Admin")">
+            <div class="modal-body">
+                    <div class="form-group">
+                        @Html.Hidden("CategoryId")
+                        <label for="recipient-name" class="col-form-label">Yeni Kategori İsmi:</label>
+                        <input type="text" class="form-control" id="CategoryName" name="CategoryName">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        function Remove(id) {
+            Swal.fire({
+                title: 'Emin misiniz?',
+                text: "Değişiklikler geri alınmayacaktır!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet',
+                cancelButtonText: 'Hayır',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/Admin/RemoveCategory?categoryId=" + id;
+                }
+            })
+        }
+        $(document).ready(function () {
+            var msg = "@ViewBag.Alert";
+            if (msg.toLowerCase() == "false") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata...',
+                    text: '@Html.Raw(ViewBag.Message)',
+                });
+            }
+            else if (msg.toLowerCase() == "true") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bilgi...',
+                    text: '@Html.Raw(ViewBag.Message)',
+                });
+            }
+        });
+
+        $('#categoryUpdateModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var name = button.data('name') 
+            var modal = $(this)
+            modal.find('.modal-body input#CategoryId').val(id)
+            modal.find('.modal-body input#CategoryName').val(name)
+        })
+    </script>
+}

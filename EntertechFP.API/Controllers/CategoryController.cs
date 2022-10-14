@@ -46,15 +46,15 @@ namespace EntertechFP.API.Controllers
             }
             return new BaseResponse<Category>("Kategori ismi mevcut");
         }
-        [HttpPatch("{id}/{categoryname}")]
-        public BaseResponse<Category> Update(int id, string categoryName)
+        [HttpPatch("{id}")]
+        public BaseResponse<Category> Update(int id,[FromBody] Category category)
         {
-            var category = Get(id).Data;
-            if (categoryService.Get(c => c.CategoryName.Equals(categoryName)) is not null)
+            var updatedCategory = Get(id).Data;
+            if (categoryService.Get(c => c.CategoryName.Equals(category.CategoryName)) is not null)
                 return new BaseResponse<Category>("Kategori ismi mevcut");
-            category.CategoryName = categoryName;
-            categoryService.Update(category);
-            return new BaseResponse<Category>(category);
+            updatedCategory.CategoryName = category.CategoryName;
+            categoryService.Update(updatedCategory);
+            return new BaseResponse<Category>(updatedCategory);
         }
 
         [HttpDelete("{id}")]
