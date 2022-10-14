@@ -41,15 +41,15 @@ namespace EntertechFP.API.Controllers
             cityService.Add(city);
             return new BaseResponse<City>(city);
         }
-        [HttpPatch("{id}/{cityname}")]
-        public BaseResponse<City> Update(int id, string cityName)
+        [HttpPatch("{id}")]
+        public BaseResponse<City> Update(int id,[FromBody] City city)
         {
-            var city = Get(id).Data;
-            if (cityService.Get(c => c.CityName.Equals(cityName)) is not null)
+            var updatedCity = Get(id).Data;
+            if (cityService.Get(c => c.CityName.Equals(city.CityName)) is not null)
                 return new BaseResponse<City>("Şehir mevcut.");
-            city.CityName = cityName;
-            cityService.Update(city);
-            return new BaseResponse<City>(city);
+            updatedCity.CityName = city.CityName;
+            cityService.Update(updatedCity);
+            return new BaseResponse<City>(updatedCity);
         }
         [HttpDelete("{id}")]
         public BaseResponse<City> DeleteCity(int id)

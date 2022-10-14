@@ -211,6 +211,75 @@ namespace EntertechFP.UI.Controllers.Admin
                 TempData["message"] = "Kategori silinemedi.";
             return RedirectToAction(nameof(Categories), "Admin", new { success = success });
         }
+
+        [HttpGet]
+        public IActionResult CategoryDetails(int categoryId)
+        {
+            var request = requestHelper.Action<CategoryDto>($"category/{categoryId}?include=1", ActionType.Get, null);
+            var model = request.Result.Data;
+            return View(model);
+        }
+        #endregion
+
+        #region City Section
+        public IActionResult Cities(bool? success)
+        {
+            var request = requestHelper.Action<List<CityDto>>("city?include=1", ActionType.Get, null);
+            var cities = request.Result.Data;
+            if (success is not null)
+            {
+                ViewBag.Alert = success;
+                ViewBag.Message = TempData["message"];
+            }
+            return View(cities);
+        }
+
+        [HttpPost]
+        public IActionResult AddCity(CityDto city)
+        {
+            var request = requestHelper.Action("city", ActionType.Post, city);
+            var success = request.Result.Success;
+            TempData["success"] = success;
+            if (success)
+                TempData["message"] = "Şehir başarıyla eklendi.";
+            else
+                TempData["message"] = "Şehir eklenemedi.";
+            return RedirectToAction(nameof(Cities), "Admin", new { success = success });
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCity(CityDto city)
+        {
+            var request = requestHelper.Action($"city/{city.CityId}", ActionType.Patch, city);
+            var success = request.Result.Success;
+            TempData["success"] = success;
+            if (success)
+                TempData["message"] = "Şehir başarıyla güncellendi.";
+            else
+                TempData["message"] = "Şehir güncellenemedi.";
+            return RedirectToAction(nameof(Cities), "Admin", new { success = success });
+        }
+
+        [HttpGet]
+        public IActionResult RemoveCity(int cityId)
+        {
+            var request = requestHelper.Action<CityDto>($"city/{cityId}", ActionType.Delete, null);
+            var success = request.Result.Success;
+            TempData["success"] = success;
+            if (success)
+                TempData["message"] = "Şehir başarıyla silindi.";
+            else
+                TempData["message"] = "Şehir silinemedi.";
+            return RedirectToAction(nameof(Cities), "Admin", new { success = success });
+        }
+
+        [HttpGet]
+        public IActionResult CityDetails(int cityId)
+        {
+            var request = requestHelper.Action<CityDto>($"city/{cityId}?include=1", ActionType.Get, null);
+            var model = request.Result.Data;
+            return View(model);
+        }
         #endregion
     }
 }

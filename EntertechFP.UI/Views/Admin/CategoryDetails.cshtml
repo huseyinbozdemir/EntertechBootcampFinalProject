@@ -1,0 +1,124 @@
+﻿@using EntertechFP.UI.Models.Entitities
+@model CategoryDto
+
+<section class="content">
+    <div class="content-header">
+        <h1>Kategori Detayları</h1>
+    </div>
+    <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-search"></i>
+                    Kategori Detayları
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="firstName">Kategori Adı</label>
+                    <input type="text" id="firstName" class="form-control" readonly value="@Model.CategoryName">
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Kategoriye Ait Etkinlikler</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 2%">#</th>
+                                    <th style="width: 51%">Etkinlik Adı</th>
+                                    <th style="width: 20%" class="text-center">Kapasite</th>
+                                    <th style="width: 15%" class="text-center">Durum</th>
+                                    <th style="width: 12%"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Events is not null)
+                                {
+                                    for (int i = 0; i < Model.Events.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@(i + 1)</td>
+                                            <td>@Model.Events[i].EventName</td>
+                                            <td class="text-center">@Model.Events[i].Capacity</td>
+
+                                            <td class="text-center">
+                                                <h5>
+                                                    @switch (Model.Events[i].IsApproved)
+                                                    {
+                                                        case true:
+                                                            <span class="badge bg-success">Onaylandı</span>
+                                                            break;
+                                                        case false:
+                                                            <span class="badge bg-danger">Reddedildi</span>
+                                                            break;
+                                                        case null:
+                                                            <span class="badge bg-primary">Bekliyor</span>
+                                                            break;
+                                                    }
+                                                </h5>
+                                            </td>
+                                            <td class="text-right">
+                                                <a class="btn btn-outline-primary btn-sm" href="@Url.Action("EventDetails","Admin",new {eventid=Model.Events[i].EventId})">
+                                                    <i class="fas fa-search">
+                                                    </i>
+                                                    İncele
+                                                </a>
+                                                <a class="btn btn-outline-danger btn-sm" onclick="Remove(@Model.Events[i].EventId)">
+                                                    <i class="fas fa-trash">
+                                                    </i>
+                                                    Sil
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script type="text/javascript">
+        function Remove(id) {
+            Swal.fire({
+                title: 'Emin misiniz?',
+                text: "Değişiklikler geri alınmayacaktır!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet',
+                cancelButtonText: 'Hayır',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/Admin/RemoveEvent?EventId=" + id;
+                }
+            })
+        }
+        $(document).ready(function () {
+            var msg = "@ViewBag.Alert";
+            if (msg.toLowerCase() == "false") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata...',
+                    text: 'Etkinlik silinemedi!',
+                });
+            }
+            else if (msg.toLowerCase() == "true") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bilgi...',
+                    text: 'Etkinlik başarıyla silindi!',
+                });
+            }
+        });
+    </script>
+}
