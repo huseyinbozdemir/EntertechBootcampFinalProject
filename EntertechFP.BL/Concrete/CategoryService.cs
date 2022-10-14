@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EntertechFP.BL.Concrete
 {
-    public class CategoryService : BaseService<Category>,ICategoryService
+    internal class CategoryService : BaseService<Category>,ICategoryService
     {
         private ICategoryDal categoryDal;
 

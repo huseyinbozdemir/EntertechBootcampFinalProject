@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EntertechFP.BL.Abstract
 {
-    public interface IEventAttendanceService:IBaseService<EventAttendanceDto>
+    public interface IEventAttendanceService:IBaseService<EventAttendance>
     {
     }
 }

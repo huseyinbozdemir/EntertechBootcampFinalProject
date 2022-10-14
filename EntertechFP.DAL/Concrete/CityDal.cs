@@ -5,7 +5,7 @@ using EntertechFP.EL.Concrete;
 
 namespace EntertechFP.DAL.Concrete
 {
-    public class CityDal : RepositoryBase<City>, ICityDal
+    internal class CityDal : RepositoryBase<City>, ICityDal
     {
         public CityDal(OnlineEventDbContext context) : base(context)
         {

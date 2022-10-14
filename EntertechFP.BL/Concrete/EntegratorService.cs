@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EntertechFP.BL.Concrete
 {
-    public class EntegratorService : BaseService<Entegrator>,IEntegratorService
+    internal class EntegratorService : BaseService<Entegrator>,IEntegratorService
     {
         private IEntegratorDal entegratorDal;
 

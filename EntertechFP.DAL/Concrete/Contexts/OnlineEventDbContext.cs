@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using EntertechFP.EL.Concrete;
+﻿using EntertechFP.EL.Concrete;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace EntertechFP.DAL.Concrete.Contexts
 {
@@ -22,12 +19,9 @@ namespace EntertechFP.DAL.Concrete.Contexts
         public virtual DbSet<Entegrator> Entegrators { get; set; } = null!;
         public virtual DbSet<EntegratorEvent> EntegratorEvents { get; set; } = null!;
         public virtual DbSet<Event> Events { get; set; } = null!;
-        public virtual DbSet<EventAttendanceDto> EventAttendances { get; set; } = null!;
+        public virtual DbSet<EventAttendance> EventAttendances { get; set; } = null!;
         public virtual DbSet<Notification> Notifications { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
-
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>(entity =>
@@ -103,7 +97,7 @@ namespace EntertechFP.DAL.Concrete.Contexts
                     .HasConstraintName("FK_Events_Users");
             });
 
-            modelBuilder.Entity<EventAttendanceDto>(entity =>
+            modelBuilder.Entity<EventAttendance>(entity =>
             {
                 entity.HasNoKey();
 

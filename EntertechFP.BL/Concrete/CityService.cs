@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EntertechFP.BL.Concrete
 {
-    public class CityService : BaseService<City>, ICityService
+    internal class CityService : BaseService<City>, ICityService
     {
         private ICityDal cityDal;
 

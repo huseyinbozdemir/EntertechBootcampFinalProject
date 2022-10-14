@@ -5,7 +5,7 @@ using EntertechFP.EL.Concrete;
 
 namespace EntertechFP.DAL.Concrete
 {
-    public class EventAttendanceDal : RepositoryBase<EventAttendanceDto>, IEventAttendanceDal
+    internal class EventAttendanceDal : RepositoryBase<EventAttendance>, IEventAttendanceDal
     {
         public EventAttendanceDal(OnlineEventDbContext context) : base(context)
         {

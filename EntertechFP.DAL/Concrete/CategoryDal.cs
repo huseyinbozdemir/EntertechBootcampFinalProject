@@ -5,7 +5,7 @@ using EntertechFP.EL.Concrete;
 
 namespace EntertechFP.DAL.Concrete
 {
-    public class CategoryDal:RepositoryBase<Category>,ICategoryDal
+    internal class CategoryDal:RepositoryBase<Category>,ICategoryDal
     {
         public CategoryDal(OnlineEventDbContext context) : base(context)
         {

@@ -5,7 +5,7 @@ using EntertechFP.EL.Concrete;
 
 namespace EntertechFP.DAL.Concrete
 {
-    public class EntegratorEventDal : RepositoryBase<EntegratorEvent>, IEntegratorEventDal
+    internal class EntegratorEventDal : RepositoryBase<EntegratorEvent>, IEntegratorEventDal
     {
         public EntegratorEventDal(OnlineEventDbContext context) : base(context)
         {

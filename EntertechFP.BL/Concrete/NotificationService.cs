@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EntertechFP.BL.Concrete
 {
-    public class NotificationService : BaseService<Notification>, INotificationService
+    internal class NotificationService : BaseService<Notification>, INotificationService
     {
         private INotificationDal notificationDal;
         public NotificationService(INotificationDal notificationDal, OnlineEventDbContext context) : base(context)

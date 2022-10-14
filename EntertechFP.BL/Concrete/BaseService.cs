@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace EntertechFP.BL.Concrete
 {
-    public abstract class BaseService<T> : IBaseService<T>
+    internal abstract class BaseService<T> : IBaseService<T>
         where T : class, new()
     {
         protected readonly IEntityRepository<T> repository;

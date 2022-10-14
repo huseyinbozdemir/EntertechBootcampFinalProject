@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EntertechFP.BL.Concrete
 {
-    public class EventService : BaseService<Event>,IEventService
+    internal class EventService : BaseService<Event>,IEventService
     {
         private IEventDal eventDal;
 

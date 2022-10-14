@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EntertechFP.DAL.Abstract
 {
-    public interface IEventAttendanceDal : IEntityRepository<EventAttendanceDto>
+    public interface IEventAttendanceDal : IEntityRepository<EventAttendance>
     {
     }
 }

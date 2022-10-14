@@ -5,7 +5,7 @@ using EntertechFP.EL.Concrete;
 
 namespace EntertechFP.DAL.Concrete
 {
-    public class NotificationDal:RepositoryBase<Notification>, INotificationDal
+    internal class NotificationDal:RepositoryBase<Notification>, INotificationDal
     {
         public NotificationDal(OnlineEventDbContext context) : base(context)
         {

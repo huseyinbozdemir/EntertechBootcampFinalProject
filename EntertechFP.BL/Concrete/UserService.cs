@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EntertechFP.BL.Concrete
 {
-    public class UserService : BaseService<User>, IUserService
+    internal class UserService : BaseService<User>, IUserService
     {
         private IUserDal userDal;
 

@@ -5,7 +5,7 @@ using EntertechFP.EL.Concrete;
 
 namespace EntertechFP.DAL.Concrete
 {
-    public class UserDal : RepositoryBase<User>, IUserDal
+    internal class UserDal : RepositoryBase<User>, IUserDal
     {
         public UserDal(OnlineEventDbContext context) : base(context)
         {

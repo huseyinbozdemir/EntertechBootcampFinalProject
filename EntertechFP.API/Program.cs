@@ -1,5 +1,3 @@
-using AutoMapper;
-using EntertechFP.API.Mappers;
 using EntertechFP.API.Utils.Extensions;
 using EntertechFP.DAL.Concrete.Contexts;
 using Microsoft.EntityFrameworkCore;

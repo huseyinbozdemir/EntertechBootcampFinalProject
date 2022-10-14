@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EntertechFP.BL.Concrete
 {
-    public class EventAttendanceService : BaseService<EventAttendanceDto>,IEventAttendanceService
+    internal class EventAttendanceService : BaseService<EventAttendance>,IEventAttendanceService
     {
         private IEventAttendanceDal eventAttendanceDal;
         public EventAttendanceService(IEventAttendanceDal eventAttendanceDal, OnlineEventDbContext context) : base(context)
