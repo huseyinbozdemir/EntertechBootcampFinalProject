@@ -7,7 +7,7 @@
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
         public string Password { get; set; }
-
+        public byte Role { get; set; }
         public List<EventDto> Events { get; set; }
         public List<NotificationDto> Notifications { get; set; }
     }

@@ -31,10 +31,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRXZlbnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hüseyin Bozdemir/source/repos/Entertech Bootcamp/EntertechFP/EntertechFP.UI/Views/Admin/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW4uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Hüseyin Bozdemir/source/repos/Entertech Bootcamp/EntertechFP/EntertechFP.UI/Views/Admin/PendingEvents.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGVuZGluZ0V2ZW50cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -49,6 +45,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Hüseyin Bozdemir/source/repos/Entertech Bootcamp/EntertechFP/EntertechFP.UI/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Hüseyin Bozdemir/source/repos/Entertech Bootcamp/EntertechFP/EntertechFP.UI/Views/Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Hüseyin Bozdemir/source/repos/Entertech Bootcamp/EntertechFP/EntertechFP.UI/Views/Shared/_ValidationScriptsPartial.cshtml]

@@ -8,11 +8,16 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(options =>
     {
         options.LoginPath = "/admin/login";
-        options.Cookie.Name = "adm_session";
+        options.Cookie.Name = "admin_session";
 
+    })
+    .AddCookie(options=>
+    {
+        options.LoginPath = "/admin/login";
+        options.Cookie.Name = "user_session";
     });
 builder.Services.AddScoped<CookieHelper>();
-builder.Services.AddScoped<RequestHelper>(x => new RequestHelper(builder.Configuration.GetSection("ApiKey").Value));
+builder.Services.AddScoped(x => new RequestHelper(builder.Configuration.GetSection("ApiKey").Value));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

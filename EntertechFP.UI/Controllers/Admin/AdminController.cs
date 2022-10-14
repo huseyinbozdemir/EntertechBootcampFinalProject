@@ -29,45 +29,6 @@ namespace EntertechFP.UI.Controllers.Admin
         {
             return RedirectToAction(nameof(PendingEvents));
         }
-        #region Login&Logout Section
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Login()
-        {
-            if (HttpContext.Request.Cookies["adm_session"] is not null)
-                return RedirectToAction(nameof(Index));
-            return View();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public IActionResult Login(LoginViewModel model)
-        {
-            string username = GetConfigurationInfo("Admin:username");
-            string password = GetConfigurationInfo("Admin:password");
-            if (username.Equals(model.UserName) && password.Equals(model.Password))
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name,"Admin"),
-                    new Claim(ClaimTypes.Role,"Admin")
-                };
-                cookieHelper.SignIn(claims, model.RememberMe, this);
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                ViewBag.Error = "Kullanıcı adı veya şifre hatalı.";
-                return View();
-            }
-        }
-        [HttpGet]
-        public IActionResult Logout()
-        {
-            cookieHelper.SignOut(this);
-            return RedirectToAction(nameof(Login));
-        }
-        #endregion
 
         #region Event Section
         [HttpGet]
