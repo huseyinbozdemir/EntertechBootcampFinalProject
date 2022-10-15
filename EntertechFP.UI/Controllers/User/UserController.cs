@@ -57,12 +57,12 @@ namespace EntertechFP.UI.Controllers.User
             var request = requestHelper.Action($"user/{user.UserId}", ActionType.Put, user);
             GetUser();
             TempData["status"] = "Şifreniz başarıyla değişti.";
-            return RedirectToAction("Profile", "User", new { success = request.Result.Success });
+            return RedirectToAction(nameof(Profile), "User", new { success = request.Result.Success });
         }
         #endregion
 
         #region Event Section
-        public IActionResult Events()
+        public IActionResult Events(bool? success)
         {
             var eventRequest = requestHelper.Action<List<EventDto>>("event?include=1&active=1", ActionType.Get, null);
             var eventModel = eventRequest.Result.Data;
@@ -74,6 +74,19 @@ namespace EntertechFP.UI.Controllers.User
                 NextAttends = attendanceModel.Select(x => x.Event.EventId).ToList()
             };
             return View(viewModel);
+        }
+
+        public IActionResult AttendEvent(int eventId)
+        {
+            var request = requestHelper.Action<EventAttendanceDto>($"eventAttendance/{eventId}/{user.UserId}", ActionType.Post, null);
+            TempData["Message"] = (request.Result.Success) ? "Başarılı bir şekilde etkinliğe katıldınız." : "Etkinliğine katılamadınız.";
+            return RedirectToAction(nameof(Events), "Admin", new { success = request.Result.Success });
+        }
+        public IActionResult LeaveEvent(int eventId)
+        {
+            var request = requestHelper.Action<EventAttendanceDto>($"eventAttendance/{eventId}/{user.UserId}", ActionType.Delete, null);
+            TempData["Message"] = (request.Result.Success) ? "Başarılı bir şekilde etkinlikten ayrıldınız." : "Etkinlikten ayrılamadınız.";
+            return RedirectToAction(nameof(Events), "Admin", new { success = request.Result.Success });
         }
         #endregion
     }

@@ -14,7 +14,7 @@
             <tr>
                 <th style="width: 2%">#</th>
                 <th style="width: 33%">Etkinlik Adı</th>
-                <th style="width: 33%">Kullanıcı</th>
+                <th style="width: 33%">Etkinliği Düzenleyen</th>
                 <th style="width: 10%">Kategori</th>
                 <th style="width: 10%">Şehir</th>
                 <th style="width: 12%"></th>
@@ -51,10 +51,14 @@
                     }
                     @if (Model.NextAttends.Contains(Model.Events[i].EventId))
                     {
-                        <td></td>
+                        <td class="text-center">
+                            <a href="@Url.Action("LeaveEvent","User",new {eventId=Model.Events[i].EventId})" class="btn btn-danger">Ayrıl</a>
+                        </td>
                     }
                     else{
-                        <td></td>
+                        <td class="text-center">
+                            <a href="@Url.Action("AttendEvent","User",new {eventId=Model.Events[i].EventId})" class="btn btn-primary">Katıl</a>
+                        </td>
                     }
                 </tr>
             }
