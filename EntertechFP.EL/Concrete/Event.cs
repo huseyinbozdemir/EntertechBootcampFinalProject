@@ -5,6 +5,12 @@ namespace EntertechFP.EL.Concrete
 {
     public partial class Event
     {
+        public Event()
+        {
+            EntegratorEvents = new HashSet<EntegratorEvent>();
+            EventAttendances = new HashSet<EventAttendance>();
+        }
+
         public int EventId { get; set; }
         public string EventName { get; set; } = null!;
         public DateTime EventDate { get; set; }
@@ -22,5 +28,7 @@ namespace EntertechFP.EL.Concrete
         public virtual Category? Category { get; set; }
         public virtual City? City { get; set; }
         public virtual User? User { get; set; }
+        public virtual ICollection<EntegratorEvent> EntegratorEvents { get; set; }
+        public virtual ICollection<EventAttendance> EventAttendances { get; set; }
     }
 }

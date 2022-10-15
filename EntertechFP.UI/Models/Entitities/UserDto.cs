@@ -12,7 +12,11 @@ namespace EntertechFP.UI.Models.Entitities
         public byte Role { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<EventAttendanceDto> EventAttendances { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<EventDto> Events { get; set; }
+
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<NotificationDto> Notifications { get; set; }
     }

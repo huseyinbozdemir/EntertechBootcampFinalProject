@@ -7,6 +7,7 @@ namespace EntertechFP.EL.Concrete
     {
         public User()
         {
+            EventAttendances = new HashSet<EventAttendance>();
             Events = new HashSet<Event>();
             Notifications = new HashSet<Notification>();
         }
@@ -16,8 +17,9 @@ namespace EntertechFP.EL.Concrete
         public string? LastName { get; set; }
         public string EmailAddress { get; set; } = null!;
         public string Password { get; set; } = null!;
-        public byte? Role { get; set; }
+        public byte Role { get; set; }
 
+        public virtual ICollection<EventAttendance> EventAttendances { get; set; }
         public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
     }

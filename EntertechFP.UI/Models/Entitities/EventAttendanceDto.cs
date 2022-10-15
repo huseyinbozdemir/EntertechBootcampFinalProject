@@ -4,6 +4,7 @@ namespace EntertechFP.UI.Models.Entitities
 {
     public class EventAttendanceDto
     {
+        public int AttendanceId { get; set; }
         public int EventId { get; set; }
         public int UserId { get; set; }
 

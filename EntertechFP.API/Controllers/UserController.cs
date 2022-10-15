@@ -31,7 +31,7 @@ namespace EntertechFP.API.Controllers
             var data =
                 (include == 0)
                 ? userService.Get(u => u.UserId == id)
-                : userService.Get(u => u.UserId == id, u => u.Events, u => u.Notifications);
+                : userService.Get(u => u.UserId == id, u => u.Events, u => u.Notifications, u => u.EventAttendances);
             if (data is null)
                 return new BaseResponse<User>("Kullanıcı bulunamadı");
             return new BaseResponse<User>(data);

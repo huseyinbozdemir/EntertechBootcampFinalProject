@@ -22,6 +22,8 @@ namespace EntertechFP.DAL.Concrete.Contexts
         public virtual DbSet<EventAttendance> EventAttendances { get; set; } = null!;
         public virtual DbSet<Notification> Notifications { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>(entity =>
@@ -49,15 +51,15 @@ namespace EntertechFP.DAL.Concrete.Contexts
 
             modelBuilder.Entity<EntegratorEvent>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.EntegrationId);
 
                 entity.HasOne(d => d.Entegrator)
-                    .WithMany()
+                    .WithMany(p => p.EntegratorEvents)
                     .HasForeignKey(d => d.EntegratorId)
                     .HasConstraintName("FK_EntegratorEvents_Entegrators");
 
                 entity.HasOne(d => d.Event)
-                    .WithMany()
+                    .WithMany(p => p.EntegratorEvents)
                     .HasForeignKey(d => d.EventId)
                     .HasConstraintName("FK_EntegratorEvents_Events");
             });
@@ -99,16 +101,16 @@ namespace EntertechFP.DAL.Concrete.Contexts
 
             modelBuilder.Entity<EventAttendance>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.AttendanceId);
 
                 entity.HasOne(d => d.Event)
-                    .WithMany()
+                    .WithMany(p => p.EventAttendances)
                     .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_EventAttendances_Events");
 
                 entity.HasOne(d => d.User)
-                    .WithMany()
+                    .WithMany(p => p.EventAttendances)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_EventAttendances_Users");
             });
@@ -134,6 +136,8 @@ namespace EntertechFP.DAL.Concrete.Contexts
                 entity.Property(e => e.LastName).HasMaxLength(50);
 
                 entity.Property(e => e.Password).HasMaxLength(32);
+
+                entity.Property(e => e.Role).HasDefaultValueSql("((1))");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -5,6 +5,7 @@ namespace EntertechFP.EL.Concrete
 {
     public partial class EntegratorEvent
     {
+        public int EntegrationId { get; set; }
         public int EntegratorId { get; set; }
         public int EventId { get; set; }
 

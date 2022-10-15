@@ -4,6 +4,7 @@ namespace EntertechFP.UI.Models.Entitities
 {
     public class EntegratorEventDto
     {
+        public int EntegrationId { get; set; }
         public int EntegratorId { get; set; }
         public int EventId { get; set; }
 
