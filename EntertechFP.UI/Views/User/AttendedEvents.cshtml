@@ -6,18 +6,17 @@
 
 <section class="content">
     <div class="content-header">
-        <h1>Etkinlikler</h1>
+        <h1>Katıldığınız Etkinlikler</h1>
     </div>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th style="width: 2%">#</th>
-                <th style="width: 30%">Etkinlik Adı</th>
-                <th style="width: 30%">Etkinliği Düzenleyen</th>
+                <th style="width: 33%">Etkinlik Adı</th>
+                <th style="width: 33%">Etkinliği Düzenleyen</th>
                 <th style="width: 10%">Kategori</th>
                 <th style="width: 10%">Şehir</th>
-                <th>Kapasite</th>
-                <th style="width: 10%"></th>
+                <th style="width: 12%"></th>
 
             </tr>
         </thead>
@@ -52,7 +51,6 @@
                     {
                         <td></td>
                     }
-                    <td>@Model[i].Capacity</td>
                     <td class="text-center">
                         <a href="@Url.Action("EventDetails","User",new {eventId=Model[i].EventId})" class="btn btn-outline-primary">İncele</a>
                     </td>
@@ -61,4 +59,3 @@
         </tbody>
     </table>
 </section>
-

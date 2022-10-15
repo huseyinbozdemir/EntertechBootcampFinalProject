@@ -24,5 +24,9 @@ namespace EntertechFP.UI.Models.Entitities
         public CityDto? City { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public UserDto? User { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<EntegratorEventDto> EntegratorEvents { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<EventAttendanceDto> EventAttendances { get; set; }
     }
 }

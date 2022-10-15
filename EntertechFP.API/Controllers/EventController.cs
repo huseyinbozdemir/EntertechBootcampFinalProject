@@ -43,7 +43,7 @@ namespace EntertechFP.API.Controllers
         {
             var data = (include == 0)
                 ? eventService.Get(e => e.EventId == id)
-                : eventService.Get(e => e.EventId == id, e => e.Category, e => e.City, e => e.User);
+                : eventService.Get(e => e.EventId == id, e => e.Category, e => e.City, e => e.User, e => e.EventAttendances);
             if (data is null)
                 return new BaseResponse<Event>("Etkinlik bulunamadı.");
             return new BaseResponse<Event>(data);

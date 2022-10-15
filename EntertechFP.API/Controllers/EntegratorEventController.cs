@@ -17,7 +17,7 @@ namespace EntertechFP.API.Controllers
             this.entegratorEventService = entegratorEventService;
         }
 
-        [HttpGet("${id}")]
+        [HttpGet("{id}")]
         public BaseResponse<List<EntegratorEvent>> GetAll(int id, int include = 0)
             => include == 0
             ? new BaseResponse<List<EntegratorEvent>>(entegratorEventService.GetAll(e => e.EventId == id))

@@ -4,6 +4,8 @@ using EntertechFP.UI.Utils;
 using EntertechFP.UI.Utils.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Reflection;
 
 namespace EntertechFP.UI.Controllers.User
 {
@@ -26,7 +28,7 @@ namespace EntertechFP.UI.Controllers.User
 
         public IActionResult Profile(bool? success)
         {
-            if(success is not null)
+            if (success is not null)
             {
                 ViewBag.Alert = success;
                 ViewBag.Message = TempData["status"];
@@ -62,32 +64,61 @@ namespace EntertechFP.UI.Controllers.User
         #endregion
 
         #region Event Section
-        public IActionResult Events(bool? success)
+        public IActionResult Events()
         {
             var eventRequest = requestHelper.Action<List<EventDto>>("event?include=1&active=1", ActionType.Get, null);
             var eventModel = eventRequest.Result.Data;
-            var attendanceRequest = requestHelper.Action<List<EventAttendanceDto>>($"eventAttendance/GetNextAttends/{user.UserId}",ActionType.Get, null);
-            var attendanceModel = attendanceRequest.Result.Data;
-            UserEventsViewModel viewModel = new UserEventsViewModel
-            {
-                Events = eventModel,
-                NextAttends = attendanceModel.Select(x => x.Event.EventId).ToList()
-            };
-            return View(viewModel);
+            return View(eventModel);
         }
 
+        public IActionResult EventDetails(int eventId, bool? success)
+        {
+            var viewModel = new UserEventDetailsViewModel();
+            var eventRequest = requestHelper.Action<EventDto>($"event/{eventId}?include=1", ActionType.Get, null);
+            viewModel.Event = eventRequest.Result.Data;
+            if (viewModel.Event.IsTicketed)
+            {
+                var entegratorRequest = requestHelper.Action<List<EntegratorEventDto>>($"entegratorEvent/{eventId}?include=1", ActionType.Get, null);
+                var entegratorModel = entegratorRequest.Result.Data;
+                if(entegratorModel is not null)
+                {
+                    viewModel.Entegrators = entegratorModel.Select(e => e.Entegrator).ToList();
+                }
+            }
+            viewModel.IsAttended = viewModel.Event.EventAttendances.Where(e => e.UserId == user.UserId).FirstOrDefault() is not null;
+            if(success is not null)
+            {
+                ViewBag.Alert = success;
+                ViewBag.Message = TempData["Message"];
+            }
+            return View(viewModel);
+        }
         public IActionResult AttendEvent(int eventId)
         {
             var request = requestHelper.Action<EventAttendanceDto>($"eventAttendance/{eventId}/{user.UserId}", ActionType.Post, null);
             TempData["Message"] = (request.Result.Success) ? "Başarılı bir şekilde etkinliğe katıldınız." : "Etkinliğine katılamadınız.";
-            return RedirectToAction(nameof(Events), "Admin", new { success = request.Result.Success });
+            return RedirectToAction(nameof(EventDetails), "User", new { eventId = eventId, success = request.Result.Success });
         }
         public IActionResult LeaveEvent(int eventId)
         {
             var request = requestHelper.Action<EventAttendanceDto>($"eventAttendance/{eventId}/{user.UserId}", ActionType.Delete, null);
             TempData["Message"] = (request.Result.Success) ? "Başarılı bir şekilde etkinlikten ayrıldınız." : "Etkinlikten ayrılamadınız.";
-            return RedirectToAction(nameof(Events), "Admin", new { success = request.Result.Success });
+            return RedirectToAction(nameof(EventDetails), "User", new { eventId=eventId,success = request.Result.Success });
         }
+        public IActionResult AttendedEvents()
+        {
+            var request = requestHelper.Action<List<EventDto>>($"eventAttendance/GetAttendeds/{user.UserId}", ActionType.Get, null);
+            var model = request.Result.Data;
+            return View(model);
+        }
+
+        public IActionResult NextAttends()
+        {
+            var request = requestHelper.Action<List<EventDto>>($"eventAttendance/GetNextAttends/{user.UserId}", ActionType.Get, null);
+            var model = request.Result.Data;
+            return View(model);
+        }
+
         #endregion
     }
 }

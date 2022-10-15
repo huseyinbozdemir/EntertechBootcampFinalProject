@@ -35,32 +35,41 @@ namespace EntertechFP.API.Controllers
             : new BaseResponse<List<EventAttendance>>(eventAttendanceService.GetAll(null, c => c.Event, c => c.User));
 
         [HttpGet("GetAttendeds/{id}")]
-        public BaseResponse<List<EventAttendance>> GetAttendeds(int id)
+        public BaseResponse<List<Event>> GetAttendeds(int id)
         {
             var data = eventAttendanceService.GetAll(ea => ea.UserId == id, ea => ea.Event);
             if (data is null)
-                return new BaseResponse<List<EventAttendance>>("Kullanıcı bulunamadı.");
-            return new BaseResponse<List<EventAttendance>>(data.Where(ea => ea.Event.EventDate < DateTime.Now).ToList());
+                return new BaseResponse<List<Event>>("Kullanıcı bulunamadı.");
+            data = data.Where(ea => ea.Event.EventDate < DateTime.Now).ToList();
+            var eventData = eventService.GetAll(e => data.Select(ea => ea.Event.EventId).ToList().Contains(e.EventId), e => e.User, e => e.Category, e => e.City);
+            return new BaseResponse<List<Event>>(eventData);
         }
         [HttpGet("GetNextAttends/{id}")]
-        public BaseResponse<List<EventAttendance>> GetNextAttends(int id)
+        public BaseResponse<List<Event>> GetNextAttends(int id)
         {
             var data = eventAttendanceService.GetAll(ea => ea.UserId == id, ea => ea.Event);
             if (data is null)
-                return new BaseResponse<List<EventAttendance>>("Kullanıcı bulunamadı.");
-            return new BaseResponse<List<EventAttendance>>(data.Where(ea => ea.Event.EventDate >= DateTime.Now).ToList());
+                return new BaseResponse<List<Event>>("Kullanıcı bulunamadı.");
+            data = data.Where(ea => ea.Event.EventDate >= DateTime.Now).ToList();
+            var eventData = eventService.GetAll(e => data.Select(ea => ea.Event.EventId).ToList().Contains(e.EventId), e => e.User, e => e.Category, e => e.City);
+            return new BaseResponse<List<Event>>(eventData);
         }
         [HttpPost("{eventId}/{userId}")]
         public BaseResponse<EventAttendance> Add(int eventId, int userId)
         {
             var @event = eventService.Get(e => e.EventId == eventId);
             var user = userService.Get(u => u.UserId == userId);
+            var control = eventAttendanceService.Get(e => e.UserId == userId && e.EventId == eventId);
+            if (control is not null)
+                return new BaseResponse<EventAttendance>("Kullanıcı etkinliğe zaten katılmış.");
             if (@event is null)
                 return new BaseResponse<EventAttendance>("Etkinlik bulunamadı.");
             if (user is null)
                 return new BaseResponse<EventAttendance>("Kullanıcı bulunamadı");
             if (@event.Capacity < 1)
                 return new BaseResponse<EventAttendance>("Kapasite yetersiz.");
+            if(@event.LastAttendDate<DateTime.Now)
+                return new BaseResponse<EventAttendance>("Etkinliğe son katılım tarihi geçmiş.");
             @event.Capacity--;
             eventService.Update(@event);
             var eventAttendance = new EventAttendance { EventId = eventId, UserId = userId };
@@ -73,6 +82,8 @@ namespace EntertechFP.API.Controllers
             var attendance = eventAttendanceService.Get(ea => ea.EventId == eventId && ea.UserId == userId);
             var @event = eventService.Get(e => e.EventId == eventId);
             var user = userService.Get(u => u.UserId == userId);
+            if (attendance is null)
+                return new BaseResponse<EventAttendance>("Kullanıcı etkinliğe katılmamış.");
             if (@event is null)
                 return new BaseResponse<EventAttendance>("Etkinlik bulunamadı.");
             if (user is null)
@@ -82,6 +93,5 @@ namespace EntertechFP.API.Controllers
             eventService.Update(@event);
             return new BaseResponse<EventAttendance>(true);
         }
-
     }
 }
