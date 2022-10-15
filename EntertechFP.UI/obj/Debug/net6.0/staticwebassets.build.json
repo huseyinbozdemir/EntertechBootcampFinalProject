@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fyd6LAf8OF4Fvy5s5S2I2Rm5h32EZp2KcGYqlfsh3gk=",
+  "Hash": "bzM+wdHsbLc0DGXmp0UX1YlnonNfFN/da0OhoRHDAAc=",
   "Source": "EntertechFP.UI",
   "BasePath": "_content/EntertechFP.UI",
   "Mode": "Default",
@@ -578,12 +578,12 @@
       "OriginalItemSpec": "wwwroot\\img\\Admin-icon.png"
     },
     {
-      "Identity": "C:\\Users\\Hüseyin Bozdemir\\source\\repos\\Entertech Bootcamp\\EntertechFP\\EntertechFP.UI\\wwwroot\\img\\AdminLTELogo.png",
+      "Identity": "C:\\Users\\Hüseyin Bozdemir\\source\\repos\\Entertech Bootcamp\\EntertechFP\\EntertechFP.UI\\wwwroot\\img\\Eo_circle_deep-purple_letter-e.png",
       "SourceId": "EntertechFP.UI",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Hüseyin Bozdemir\\source\\repos\\Entertech Bootcamp\\EntertechFP\\EntertechFP.UI\\wwwroot\\",
       "BasePath": "_content/EntertechFP.UI",
-      "RelativePath": "img/AdminLTELogo.png",
+      "RelativePath": "img/Eo_circle_deep-purple_letter-e.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -592,7 +592,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\AdminLTELogo.png"
+      "OriginalItemSpec": "wwwroot\\img\\Eo_circle_deep-purple_letter-e.png"
     },
     {
       "Identity": "C:\\Users\\Hüseyin Bozdemir\\source\\repos\\Entertech Bootcamp\\EntertechFP\\EntertechFP.UI\\wwwroot\\img\\logo-xl.png",

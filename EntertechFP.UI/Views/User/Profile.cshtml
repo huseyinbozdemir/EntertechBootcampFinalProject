@@ -1,0 +1,55 @@
+﻿@using EntertechFP.UI.Models.Entitities
+@{
+    Layout = "_UserLayout";
+}
+@model UserDto
+
+<section class="content">
+    <div class="content-header">
+        <h1>Profilim</h1>
+    </div>
+    <div class="col-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-search"></i>
+                    Profilim
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="firstName">İsim</label>
+                    <input type="text" id="firstName" class="form-control" readonly value="@Model.FirstName">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Soyisim</label>
+                    <input type="text" id="lastName" class="form-control" readonly value="@Model.LastName">
+                </div>
+                <div class="form-group">
+                    <label for="emailAddress">E-Mail Adresi</label>
+                    <input type="text" id="emailAddress" class="form-control" readonly value="@Model.EmailAddress">
+                </div>
+                <div class="form-group">
+                    <label for="eventsCount">Oluşturduğunuz Etkinlik Sayısı</label>
+                    <input type="text" id="eventsCount" class="form-control" readonly value="@Model.Events.Count">
+                </div>
+                <a href="@Url.Action("ChangePassword","User")" class="btn btn-primary">Şifre Değiştir</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var msg = "@ViewBag.Alert";
+            if (msg.toLowerCase() == "true") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bilgi...',
+                    text: '@Html.Raw(ViewBag.Message)',
+                });
+            }
+        });
+    </script>
+}

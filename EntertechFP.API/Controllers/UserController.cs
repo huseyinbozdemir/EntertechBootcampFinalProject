@@ -54,7 +54,7 @@ namespace EntertechFP.API.Controllers
             return new BaseResponse<User>("Bu mail zaten mevcut.");
         }
         [HttpPut("{id}")]
-        public BaseResponse<User> Update(int id, [FromBody] User user)//
+        public BaseResponse<User> Update(int id, [FromBody] User user)
         {
             var current = Get(id).Data;
             if (current is null)

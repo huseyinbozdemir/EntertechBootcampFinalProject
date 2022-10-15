@@ -1,5 +1,5 @@
 ﻿using EntertechFP.UI.Models.Entitities;
-using EntertechFP.UI.Utils;
+using EntertechFP.UI.Utils.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

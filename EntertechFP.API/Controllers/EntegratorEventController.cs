@@ -1,12 +1,7 @@
 ﻿using EntertechFP.API.Attributes;
 using EntertechFP.API.Responses;
 using EntertechFP.BL.Abstract;
-using EntertechFP.BL.Concrete;
-using EntertechFP.DAL.Abstract;
-using EntertechFP.DAL.Concrete;
-using EntertechFP.DAL.Concrete.Contexts;
 using EntertechFP.EL.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntertechFP.API.Controllers
@@ -22,10 +17,10 @@ namespace EntertechFP.API.Controllers
             this.entegratorEventService = entegratorEventService;
         }
 
-        [HttpGet]
-        public BaseResponse<List<EntegratorEvent>> GetAll(int include = 0)
+        [HttpGet("${id}")]
+        public BaseResponse<List<EntegratorEvent>> GetAll(int id, int include = 0)
             => include == 0
-            ? new BaseResponse<List<EntegratorEvent>>(entegratorEventService.GetAll())
-            : new BaseResponse<List<EntegratorEvent>>(entegratorEventService.GetAll(null, c => c.Event, c => c.Entegrator));
+            ? new BaseResponse<List<EntegratorEvent>>(entegratorEventService.GetAll(e => e.EventId == id))
+            : new BaseResponse<List<EntegratorEvent>>(entegratorEventService.GetAll(e => e.EventId == id, c => c.Entegrator));
     }
 }
