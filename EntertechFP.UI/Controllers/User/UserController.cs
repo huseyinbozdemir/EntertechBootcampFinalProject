@@ -64,9 +64,16 @@ namespace EntertechFP.UI.Controllers.User
         #region Event Section
         public IActionResult Events()
         {
-            var request = requestHelper.Action<List<EventDto>>("event?include=1&active=1", ActionType.Get, null);
-            var model = request.Result.Data;
-            return View(model);
+            var eventRequest = requestHelper.Action<List<EventDto>>("event?include=1&active=1", ActionType.Get, null);
+            var eventModel = eventRequest.Result.Data;
+            var attendanceRequest = requestHelper.Action<List<EventAttendanceDto>>($"eventAttendance/GetNextAttends/{user.UserId}",ActionType.Get, null);
+            var attendanceModel = attendanceRequest.Result.Data;
+            UserEventsViewModel viewModel = new UserEventsViewModel
+            {
+                Events = eventModel,
+                NextAttends = attendanceModel.Select(x => x.Event.EventId).ToList()
+            };
+            return View(viewModel);
         }
         #endregion
     }

@@ -34,7 +34,7 @@ namespace EntertechFP.API.Controllers
             if (pending != 0)
                 eventList = eventList.Where(e => e.IsApproved is null).ToList();
             if (active != 0)
-                eventList = eventList.Where(e => e.EventDate > DateTime.Now).ToList();
+                eventList = eventList.Where(e => e.EventDate > DateTime.Now && e.IsApproved == true).ToList();
             return new BaseResponse<List<Event>>(eventList);
 
         }
