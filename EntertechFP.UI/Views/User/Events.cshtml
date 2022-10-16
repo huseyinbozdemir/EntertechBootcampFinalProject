@@ -122,14 +122,32 @@
             var val = document.getElementById("cityList").value;
             if(val != '-')
             {
-                window.location.href = "/User/Events?cityId=" + val;
+                const urlParams = new URLSearchParams(window.location.search);
+                const categoryId = urlParams.get('categoryId');
+                if (categoryId !== null) {
+                    window.location.href = "/User/Events?cityId=" + val + "&categoryId=" + categoryId;
+
+                }
+                else {
+                    window.location.href = "/User/Events?cityId=" + val;
+
+                }
             }
 
         }
         function categoryChange(){
             var val = document.getElementById("categoryList").value;
             if (val != '-') {
-                window.location.href = "/User/Events?categoryId=" + val;
+                const urlParams = new URLSearchParams(window.location.search);
+                const cityId = urlParams.get('cityId');
+                if(cityId!==null){
+                    window.location.href = "/User/Events?categoryId=" + val+"&cityId="+cityId;
+
+                }
+                else{
+                    window.location.href = "/User/Events?categoryId=" + val;
+
+                }
             }
         }
         document.addEventListener("DOMContentLoaded", () => {
@@ -139,8 +157,7 @@
             if (cityId !== null) {
                 document.getElementById("cityList").value=cityId;
             }
-            else if(categoryId!== null)
-            {
+            if(categoryId!== null){
                 document.getElementById("categoryList").value = categoryId;
 
             }

@@ -189,7 +189,7 @@ namespace EntertechFP.UI.Controllers.User
                 CategoryId = model.CategoryId,
                 UserId = user.UserId,
                 CityId = model.CityId,
-                Fare = model.Fare,
+                Fare = (model.IsTicketed) ? model.Fare : 0,
                 IsTicketed = model.IsTicketed,
                 Description = model.Description,
                 EventDate = model.EventDate,
