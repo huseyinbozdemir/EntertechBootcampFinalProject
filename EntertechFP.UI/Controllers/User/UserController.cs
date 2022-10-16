@@ -26,9 +26,12 @@ namespace EntertechFP.UI.Controllers.User
         public IActionResult Index()
         {
             GetUser();
-            var notifications=user.Notifications;
+            var notifications = user.Notifications;
             notifications.Reverse();
-            var request = requestHelper.Action($"notification/{user.UserId}", ActionType.Patch, user.Notifications);
+            if (notifications.Where(n => !n.IsSeen).ToList().Count > 0)
+            {
+                var request = requestHelper.Action($"notification/{user.UserId}", ActionType.Patch, user.Notifications);
+            }
             return View(notifications);
         }
         #region Profile & Logout Section
@@ -76,7 +79,7 @@ namespace EntertechFP.UI.Controllers.User
         #endregion
 
         #region Event Section
-        public IActionResult Events(bool? success)
+        public IActionResult Events(bool? success, int? cityId, int? categoryId)
         {
             var eventRequest = requestHelper.Action<List<EventDto>>("event?include=1&active=1", ActionType.Get, null);
             var eventModel = eventRequest.Result.Data;
@@ -85,6 +88,11 @@ namespace EntertechFP.UI.Controllers.User
                 ViewBag.Alert = success;
                 ViewBag.Message = TempData["Message"];
             }
+            if (cityId != null)
+                eventModel = eventModel.Where(e => e.CityId == cityId).ToList();
+            if (categoryId != null)
+                eventModel = eventModel.Where(e => e.CategoryId == categoryId).ToList();
+            GetCategoriesAndCities();
             return View(eventModel);
         }
 
@@ -93,7 +101,7 @@ namespace EntertechFP.UI.Controllers.User
             var viewModel = new UserEventDetailsViewModel();
             var eventRequest = requestHelper.Action<EventDto>($"event/{eventId}?include=1", ActionType.Get, null);
             viewModel.Event = eventRequest.Result.Data;
-            if(viewModel.Event.IsApproved==true)
+            if (viewModel.Event.IsApproved == true)
             {
                 if (viewModel.Event.IsTicketed)
                 {

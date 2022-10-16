@@ -1,8 +1,44 @@
 ﻿@using EntertechFP.UI.Models.Entitities
 @{
     Layout = "_UserLayout";
+    List<CityDto> cities = ViewBag.Cities;
+    List<CategoryDto> categories = ViewBag.Categories;
 }
 @model List<EventDto>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Şehir</label>
+                <select class="form-control" onchange="cityChange()" id="cityList">
+                    <option value="-">-</option>
+                    @for (int i = 0; i < cities.Count; i++)
+                    {
+                        <option value="@cities[i].CityId">@cities[i].CityName</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4 offset-md-4">
+            <div class="form-group">
+                <label>Kategori</label>
+                <select class="form-control" onchange="categoryChange()" id="categoryList">
+                    <option value="-">-</option>
+                    @for (int i = 0; i < categories.Count; i++)
+                    {
+                        <option value="@categories[i].CategoryId">@categories[i].CategoryName</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <a href="@Url.Action("Events","User")" class="btn btn-outline-primary">
+            <i class="fas fa-sync"></i>
+            Sıfırla
+        </a>
+    </div>
+</div>
 
 <section class="content">
     <div class="content-header">
@@ -18,7 +54,6 @@
                 <th style="width: 10%">Şehir</th>
                 <th>Kapasite</th>
                 <th style="width: 10%"></th>
-
             </tr>
         </thead>
         <tbody>
@@ -80,6 +115,36 @@
                     text: '@Html.Raw(ViewBag.Message)',
                 });
             }
+        });
+    </script>
+    <script type="text/javascript">
+        function cityChange(){
+            var val = document.getElementById("cityList").value;
+            if(val != '-')
+            {
+                window.location.href = "/User/Events?cityId=" + val;
+            }
+
+        }
+        function categoryChange(){
+            var val = document.getElementById("categoryList").value;
+            if (val != '-') {
+                window.location.href = "/User/Events?categoryId=" + val;
+            }
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const cityId = urlParams.get('cityId');
+            const categoryId= urlParams.get('categoryId');
+            if (cityId !== null) {
+                document.getElementById("cityList").value=cityId;
+            }
+            else if(categoryId!== null)
+            {
+                document.getElementById("categoryList").value = categoryId;
+
+            }
+
         });
     </script>
 }
