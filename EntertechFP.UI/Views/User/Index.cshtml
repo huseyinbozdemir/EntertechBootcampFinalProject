@@ -1,3 +1,56 @@
-﻿@{
+﻿@using EntertechFP.UI.Models.Entitities
+@using EntertechFP.UI.Utils
+@{
     Layout = "_UserLayout";
 }
+@model List<NotificationDto>
+
+<div class="container">
+    <div class="row justify-content-md-center mt-3">
+            <div class="card-body">
+                <div class="tab-pane active" id="timeline">
+                    <div class="timeline timeline-inverse">
+                        <div class="time-label">
+                            <span class="bg-danger">
+                                @DateTime.Now.ToShortDateString()
+                            </span>
+                        </div>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <div>
+                                @if(Model[i].IsSeen)
+                                {
+                                    <i class="fas fa-bell bg-info"></i>
+                                }
+                                else{
+                                    <i class="fas fa-bell bg-warning"></i>
+                                }
+                                <div class="timeline-item">
+                                    <span class="time"><i class="far fa-clock"></i> @Util.TimeAgo(Model[i].NotificationDate)</span>
+
+                                    @if (Model[i].Description.Contains("kabul"))
+                                    {
+                                        <h3 class="timeline-header border-0">
+                                            Etkinliğiniz <strong>kabul edildi.</strong>
+                                        </h3>
+                                    }
+                                    else
+                                    {
+                                        <h3 class="timeline-header border-0">
+                                            Etkinliğiniz <strong>reddedildi.</strong>
+                                        </h3>
+                                    }
+                                    <div class="timeline-body">
+                                        @Model[i].Description
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div>
+                            <i class="far fa-clock bg-gray"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

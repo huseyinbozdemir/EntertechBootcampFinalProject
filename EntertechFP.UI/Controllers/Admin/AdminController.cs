@@ -24,7 +24,7 @@ namespace EntertechFP.UI.Controllers.Admin
         public IActionResult Logout()
         {
             cookieHelper.SignOut(HttpContext, "admin_scheme");
-            return RedirectToAction("Login", "Index");
+            return RedirectToAction("Index", "Login");
         }
         #region Event Section
         [HttpGet]

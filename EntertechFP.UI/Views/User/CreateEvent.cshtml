@@ -1,0 +1,62 @@
+﻿@using EntertechFP.UI.Models.ViewModels
+@{
+    Layout = "_UserLayout";
+}
+@model UserAddEventViewModel
+<div class="login-page">
+
+    <div class="login-box" style="width:50%!important;">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <h1>Etkinlik Oluştur</h1>
+            </div>
+            <div class="card-body">
+                <p class="text-danger"><strong>@ViewBag.Error</strong></p>
+                <form action="@Url.Action("CreateEvent","User")" method="post">
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(m=>m.EventName,new {@class="form-control", placeholder="Etkinlik İsmi"})
+
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(m=>m.EventDate,new {@class="form-control", placeholder="Etkinlik Tarihi"})
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(m=>m.LastAttendDate,new {@class="form-control", placeholder="Son Katılım Tarihi"})
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.TextAreaFor(m=>m.Description,new {@class="form-control", placeholder="Açıklama",rows=4})
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.TextAreaFor(m=>m.Address,new {@class="form-control", placeholder="Adres",rows=4})
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(m=>m.Capacity,new {@class="form-control", placeholder="Kapasite"})
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="form-control">Kategori</label>
+                        <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Categories,"CategoryId","CategoryName"))"></select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="form-control">Şehir</label>
+                        <select asp-for="CityId" class="form-control" asp-items="@(new SelectList(ViewBag.Cities,"CityId","CityName"))"></select>
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(m=>m.Fare,new {@class="form-control", placeholder="Ücret", disabled=true})
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.CheckBoxFor(m=>m.IsTicketed,new {@clas="form-control",onclick="document.getElementById('Fare').disabled=!this.checked;"})
+                        <label for="IsTicketed">Biletli</label>            
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Etkinlik Oluştur</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+}

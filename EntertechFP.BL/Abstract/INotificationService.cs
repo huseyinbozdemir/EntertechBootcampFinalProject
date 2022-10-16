@@ -10,5 +10,6 @@ namespace EntertechFP.BL.Abstract
 {
     public interface INotificationService : IBaseService<Notification>
     {
+        void UpdateMany(Expression<Func<Notification, bool>> filter);
     }
 }

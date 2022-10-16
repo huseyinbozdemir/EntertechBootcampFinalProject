@@ -62,3 +62,24 @@
     </table>
 </section>
 
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var msg = "@ViewBag.Alert";
+            if (msg.toLowerCase() == "false") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata...',
+                    text: '@Html.Raw(ViewBag.Message)',
+                });
+            }
+            else if (msg.toLowerCase() == "true") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bilgi...',
+                    text: '@Html.Raw(ViewBag.Message)',
+                });
+            }
+        });
+    </script>
+}

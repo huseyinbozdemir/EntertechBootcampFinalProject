@@ -35,12 +35,9 @@ namespace EntertechFP.API.Controllers
         [HttpPatch("{id}")]
         public BaseResponse<Notification> Update(int id)
         {
-            var notification = notificationService.Get(n => n.NotificationId == id);
-            if (notification is null)
-                return new BaseResponse<Notification>("Bildirim bulunamadı.");
-            notification.IsSeen = true;
-            notificationService.Update(notification);
-            return new BaseResponse<Notification>(notification);
+          
+            notificationService.UpdateMany(n=>n.UserId==id);
+            return new BaseResponse<Notification>(true);
         }
 
     }

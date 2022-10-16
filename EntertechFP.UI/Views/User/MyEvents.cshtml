@@ -17,7 +17,7 @@
                 <th style="width: 10%">Kategori</th>
                 <th style="width: 10%">Şehir</th>
                 <th>Kapasite</th>
-                <th style="width: 10%"></th>
+                <th style="width: 10%" class="text-center">Durum</th>
 
             </tr>
         </thead>
@@ -52,9 +52,22 @@
                     {
                         <td></td>
                     }
-                    <td>@Model[i].Capacity</td>
+                    <td class="text-center">@Model[i].Capacity</td>
                     <td class="text-center">
-                        <a href="@Url.Action("EventDetails","User",new {eventId=Model[i].EventId})" class="btn btn-outline-primary">İncele</a>
+                        <h5>
+                            @switch (Model[i].IsApproved)
+                            {
+                                case true:
+                                    <span class="badge bg-success">Onaylandı</span>
+                                    break;
+                                case false:
+                                    <span class="badge bg-danger">Reddedildi</span>
+                                    break;
+                                case null:
+                                    <span class="badge bg-primary">Bekliyor</span>
+                                    break;
+                            }
+                        </h5>
                     </td>
                 </tr>
             }

@@ -39,8 +39,8 @@ namespace EntertechFP.API.Controllers
         [HttpGet]
         public BaseResponse<List<User>> GetAll(int include = 0)
              => (include == 0)
-                ? new BaseResponse<List<User>>(userService.GetAll())
-                : new BaseResponse<List<User>>(userService.GetAll(null, u => u.Events));
+                ? new BaseResponse<List<User>>(userService.GetAll(u=>u.Role==1))
+                : new BaseResponse<List<User>>(userService.GetAll(u => u.Role == 1, u => u.Events));
         [HttpPost]
         public BaseResponse<User> Add([FromBody] User user)
         {

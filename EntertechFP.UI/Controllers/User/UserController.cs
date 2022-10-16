@@ -4,7 +4,6 @@ using EntertechFP.UI.Utils;
 using EntertechFP.UI.Utils.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace EntertechFP.UI.Controllers.User
 {
@@ -12,8 +11,13 @@ namespace EntertechFP.UI.Controllers.User
     public class UserController : Controller
     {
         private readonly RequestHelper requestHelper;
+        private readonly CookieHelper cookieHelper;
         private static UserDto user;
-        public UserController(RequestHelper requestHelper) => this.requestHelper = requestHelper;
+        public UserController(RequestHelper requestHelper, CookieHelper cookieHelper)
+        {
+            this.requestHelper = requestHelper;
+            this.cookieHelper = cookieHelper;
+        }
         private void GetUser()
         {
             string id = HttpContext.User.Claims.FirstOrDefault(u => u.Type.Equals("Id"))?.Value;
@@ -22,9 +26,12 @@ namespace EntertechFP.UI.Controllers.User
         public IActionResult Index()
         {
             GetUser();
-            return View();
+            var notifications=user.Notifications;
+            notifications.Reverse();
+            var request = requestHelper.Action($"notification/{user.UserId}", ActionType.Patch, user.Notifications);
+            return View(notifications);
         }
-
+        #region Profile & Logout Section
         public IActionResult Profile(bool? success)
         {
             if (success is not null)
@@ -34,6 +41,12 @@ namespace EntertechFP.UI.Controllers.User
             }
             return View(user);
         }
+        public IActionResult Logout()
+        {
+            cookieHelper.SignOut(HttpContext, "user_scheme");
+            return RedirectToAction("Index", "Login");
+        }
+        #endregion
 
         #region Change Password Section
         [HttpGet]
@@ -63,10 +76,15 @@ namespace EntertechFP.UI.Controllers.User
         #endregion
 
         #region Event Section
-        public IActionResult Events()
+        public IActionResult Events(bool? success)
         {
             var eventRequest = requestHelper.Action<List<EventDto>>("event?include=1&active=1", ActionType.Get, null);
             var eventModel = eventRequest.Result.Data;
+            if (success is not null)
+            {
+                ViewBag.Alert = success;
+                ViewBag.Message = TempData["Message"];
+            }
             return View(eventModel);
         }
 
@@ -75,23 +93,27 @@ namespace EntertechFP.UI.Controllers.User
             var viewModel = new UserEventDetailsViewModel();
             var eventRequest = requestHelper.Action<EventDto>($"event/{eventId}?include=1", ActionType.Get, null);
             viewModel.Event = eventRequest.Result.Data;
-            if (viewModel.Event.IsTicketed)
+            if(viewModel.Event.IsApproved==true)
             {
-                var entegratorRequest = requestHelper.Action<List<EntegratorEventDto>>($"entegratorEvent/{eventId}?include=1", ActionType.Get, null);
-                var entegratorModel = entegratorRequest.Result.Data;
-                if (entegratorModel is not null)
+                if (viewModel.Event.IsTicketed)
                 {
-                    viewModel.Entegrators = entegratorModel.Select(e => e.Entegrator).ToList();
+                    var entegratorRequest = requestHelper.Action<List<EntegratorEventDto>>($"entegratorEvent/{eventId}?include=1", ActionType.Get, null);
+                    var entegratorModel = entegratorRequest.Result.Data;
+                    if (entegratorModel is not null)
+                    {
+                        viewModel.Entegrators = entegratorModel.Select(e => e.Entegrator).ToList();
+                    }
                 }
+                viewModel.IsAttended = viewModel.Event.EventAttendances.Where(e => e.UserId == user.UserId).FirstOrDefault() is not null;
+                if (success is not null)
+                {
+                    ViewBag.Alert = success;
+                    ViewBag.Message = TempData["Message"];
+                }
+                ViewBag.CanChange = viewModel.Event.UserId == user.UserId && (viewModel.Event.LastAttendDate - DateTime.Now).TotalDays > 5;
+                return View(viewModel);
             }
-            viewModel.IsAttended = viewModel.Event.EventAttendances.Where(e => e.UserId == user.UserId).FirstOrDefault() is not null;
-            if (success is not null)
-            {
-                ViewBag.Alert = success;
-                ViewBag.Message = TempData["Message"];
-            }
-            ViewBag.CanChange = viewModel.Event.UserId == user.UserId && (viewModel.Event.LastAttendDate-DateTime.Now).TotalDays>5;
-            return View(viewModel);
+            return RedirectToAction(nameof(Events), "User");
         }
         public IActionResult AttendEvent(int eventId)
         {
@@ -136,6 +158,52 @@ namespace EntertechFP.UI.Controllers.User
             return RedirectToAction(nameof(EventDetails), "User", new { eventId = model.EventId, success = request.Result.Success });
 
         }
+        [HttpGet]
+        public IActionResult CreateEvent()
+        {
+            GetCategoriesAndCities();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateEvent(UserAddEventViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                GetCategoriesAndCities();
+                ViewBag.Error = "Lütfen bütün alanları doğru şekilde giriniz.";
+                return View(model);
+            }
+            var eventModel = new EventDto
+            {
+                Address = model.Address,
+                Capacity = model.Capacity,
+                CategoryId = model.CategoryId,
+                UserId = user.UserId,
+                CityId = model.CityId,
+                Fare = model.Fare,
+                IsTicketed = model.IsTicketed,
+                Description = model.Description,
+                EventDate = model.EventDate,
+                LastAttendDate = model.LastAttendDate,
+                EventName = model.EventName
+            };
+            var request = requestHelper.Action("event", ActionType.Post, eventModel);
+            var success = request.Result.Success;
+            TempData["Message"] = (success) ? "Etkinliğiniz başarıyla oluşturuldu." : "Etkinlik oluşturulamadı";
+            return RedirectToAction(nameof(Events), "User", new { success = success });
+        }
+
+        private void GetCategoriesAndCities()
+        {
+            var categoriesRequest = requestHelper.Action<List<CategoryDto>>("category", ActionType.Get, null);
+            var categories = categoriesRequest.Result.Data;
+            var citiesRequest = requestHelper.Action<List<CityDto>>("city", ActionType.Get, null);
+            var cities = citiesRequest.Result.Data;
+            ViewBag.Categories = categories;
+            ViewBag.Cities = cities;
+        }
         #endregion
+
     }
 }

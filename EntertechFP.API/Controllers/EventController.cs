@@ -53,7 +53,7 @@ namespace EntertechFP.API.Controllers
         [HttpPost]
         public BaseResponse<Event> Add([FromBody] Event e)
         {
-            e.IsApproved = false;
+            e.IsApproved = null;
             eventService.Add(e);
             return new BaseResponse<Event>(e);
         }
