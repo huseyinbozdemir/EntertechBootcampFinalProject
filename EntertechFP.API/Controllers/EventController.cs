@@ -22,7 +22,7 @@ namespace EntertechFP.API.Controllers
         }
 
         [HttpGet]
-        public BaseResponse<List<Event>> GetAll(int? categoryId = null, int? cityId = null, int include = 0, int pending = 0, int active = 0)
+        public BaseResponse<List<Event>> GetAll(int? categoryId = null, int? cityId = null, int include = 0, int pending = 0, int active = 0, int userId = 0)
         {
             var eventList = (include == 0)
                  ? eventService.GetAll()
@@ -35,6 +35,8 @@ namespace EntertechFP.API.Controllers
                 eventList = eventList.Where(e => e.IsApproved is null).ToList();
             if (active != 0)
                 eventList = eventList.Where(e => e.EventDate > DateTime.Now && e.IsApproved == true).ToList();
+            if (userId != 0)
+                eventList = eventList.Where(e => e.UserId == userId).ToList();
             return new BaseResponse<List<Event>>(eventList);
 
         }

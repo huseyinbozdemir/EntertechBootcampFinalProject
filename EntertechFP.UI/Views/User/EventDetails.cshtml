@@ -17,22 +17,43 @@
                 </h3>
             </div>
             <div class="card-body">
+                <form method="post" action="@Url.Action("UpdateEvent","User",new {eventId=Model.Event.EventId})">
                 <div class="form-group">
                     <label for="eventName">Etkinlik İsmi</label>
                     <input type="text" id="eventName" class="form-control" readonly value="@Model.Event.EventName">
                 </div>
                 <div class="form-group">
-                    <label for="eventDescription">Etkinlik Açıklaması</label>
-                    <textarea id="eventDescription" class="form-control" rows="3" readonly>@Model.Event.Description</textarea>
+                    <label for="description">Etkinlik Açıklaması</label>
+                    <textarea id="description" name="description" class="form-control" rows="3" readonly>@Model.Event.Description</textarea>
                 </div>
+                @if(ViewBag.CanChange == false){
+                    <div class="form-group">
+                        <label for="address">Etkinlik Adresi</label>
+                        <textarea id="address" name="address" class="form-control" rows="3" readonly>@Model.Event.Address</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="capacity">Kapasite</label>
+                        <input type="number" id="capacity" name="capacity" class="form-control" readonly value="@Model.Event.Capacity">
+                    </div>
+                }
+                else{
+                    <div class="form-group">
+                        <label for="address">Etkinlik Adresi</label>
+                        <textarea id="address" name="address" class="form-control" rows="3">@Model.Event.Address</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="capacity">Kapasite</label>
+                        <input type="number" id="capacity" name="capacity" class="form-control" value="@Model.Event.Capacity">
+                    </div>
+                }
                 <div class="form-group">
-                    <label for="capacity">Kapasite</label>
-                    <input type="text" id="capacity" class="form-control" readonly value="@Model.Event.Capacity Kişi">
+                    <label for="eventDate">Etkinlik Tarihi</label>
+                    <input type="datetime" id="eventDate" name="eventDate" class="form-control" readonly value="@Model.Event.EventDate.ToShortDateString()">
                 </div>
-                <div class="form-group">
-                    <label for="capacity">Etkinlik Tarihi</label>
-                    <input type="text" id="capacity" class="form-control" readonly value="@Model.Event.EventDate.ToShortDateString()">
-                </div>
+                    <div class="form-group">
+                        <label for="LastAttendDate">Son Katılım Tarihi</label>
+                        <input type="datetime" id="LastAttendDate" name="LastAttendDate" class="form-control" readonly value="@Model.Event.LastAttendDate.ToShortDateString()">
+                    </div>
                 @if (Model.Event.User is not null)
                 {
                     <div class="form-group">
@@ -40,29 +61,44 @@
                         <input type="text" id="userName" class="form-control" value="@($"{Model.Event.User.FirstName} {Model.Event.User.LastName}")" readonly>
                     </div>
                 }
-                @if (!Model.Event.IsTicketed)
+                @if (ViewBag.CanChange == false)
                 {
-                    if (Model.IsAttended == false && Model.Event.LastAttendDate>DateTime.Now)
+                    if (!Model.Event.IsTicketed)
                     {
-                        <a class="btn btn-primary" href="@Url.Action("AttendEvent","User",new {eventId=Model.Event.EventId})">Katıl</a>
+                        if (Model.IsAttended == false)
+                        {
+                            if (Model.Event.LastAttendDate > DateTime.Now){
+                               <a class="btn btn-primary" href="@Url.Action("AttendEvent","User",new {eventId=Model.Event.EventId})">Katıl</a>
+                            }
+                            else{
+                                <p class="text-danger"><strong>Etkinliğe son katılım tarihi geçmiş.</strong></p>
+                            }
+                        }
+                        else
+                        {
+                            <a class="btn btn-danger" href="@Url.Action("LeaveEvent","User",new {eventId=Model.Event.EventId})">Ayrıl</a>
+
+                        }
                     }
                     else
                     {
-                        <a class="btn btn-danger" href="@Url.Action("LeaveEvent","User",new {eventId=Model.Event.EventId})">Ayrıl</a>
-
-                    }
-                }
-                else{
-                    if(Model.Entegrators is not null){
-                        @for (int i = 0; i < Model.Entegrators.Count; i++)
+                        if (Model.Entegrators is not null)
                         {
-                            <a href="@Model.Entegrators[i].DomainName" class="btn btn-outline-primary mb-1" target="_blank">
-                                <i class="fas fa-external-link-alt"></i>
-                                @Model.Entegrators[i].EntegratorName
-                            </a>
+                            @for (int i = 0; i < Model.Entegrators.Count; i++)
+                            {
+                                <a href="@Model.Entegrators[i].DomainName" class="btn btn-outline-primary mb-1" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    @Model.Entegrators[i].EntegratorName
+                                </a>
+                            }
                         }
                     }
                 }
+                else{
+                    
+                    <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+                }
+                </form>
             </div>
         </div>
     </div>

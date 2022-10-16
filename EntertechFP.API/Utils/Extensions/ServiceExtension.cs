@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EntertechFP.API.Mappers;
 using EntertechFP.BL.Extensions;
+using System.Text.Json.Serialization;
 
 namespace EntertechFP.API.Utils.Extensions
 {
@@ -16,9 +17,10 @@ namespace EntertechFP.API.Utils.Extensions
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            services.AddControllers().AddNewtonsoftJson(opt =>
-                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            );
+            services.AddControllers().AddJsonOptions(opt =>
+            {
+                opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            });
             return services;
         }
     }

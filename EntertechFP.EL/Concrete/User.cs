@@ -19,8 +19,8 @@ namespace EntertechFP.EL.Concrete
         public string Password { get; set; } = null!;
         public byte Role { get; set; }
 
-        public virtual ICollection<EventAttendance> EventAttendances { get; set; }
-        public virtual ICollection<Event> Events { get; set; }
-        public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual ICollection<EventAttendance>? EventAttendances { get; set; }
+        public virtual ICollection<Event>? Events { get; set; }
+        public virtual ICollection<Notification>? Notifications { get; set; }
     }
 }

@@ -7,16 +7,18 @@ namespace EntertechFP.API.Utils
     {
         public static string HashToMD5(string text)
         {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            byte[] array = Encoding.UTF8.GetBytes(text);
-            array = md5.ComputeHash(array);
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (byte item in array)
-            { 
+            using (MD5CryptoServiceProvider md5 = new())
+            {
+                byte[] array = Encoding.UTF8.GetBytes(text);
+                array = md5.ComputeHash(array);
+                StringBuilder stringBuilder = new StringBuilder();
+                foreach (byte item in array)
+                {
 
-                stringBuilder.Append(item.ToString("x2").ToLower());
+                    stringBuilder.Append(item.ToString("x2").ToLower());
+                }
+                return stringBuilder.ToString();
             }
-            return stringBuilder.ToString();
         }
         public static string CreateApiKey() => Guid.NewGuid().ToString();
     }

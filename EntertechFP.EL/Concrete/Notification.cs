@@ -11,6 +11,6 @@ namespace EntertechFP.EL.Concrete
         public DateTime NotificationDate { get; set; }
         public bool IsSeen { get; set; }
 
-        public virtual User User { get; set; } = null!;
+        public virtual User? User { get; set; } = null!;
     }
 }

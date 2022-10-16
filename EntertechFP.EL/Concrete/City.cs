@@ -13,6 +13,6 @@ namespace EntertechFP.EL.Concrete
         public int CityId { get; set; }
         public string CityName { get; set; } = null!;
 
-        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<Event>? Events { get; set; }
     }
 }

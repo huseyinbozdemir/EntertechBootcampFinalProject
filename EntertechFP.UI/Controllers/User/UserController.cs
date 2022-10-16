@@ -5,7 +5,6 @@ using EntertechFP.UI.Utils.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Reflection;
 
 namespace EntertechFP.UI.Controllers.User
 {
@@ -80,30 +79,33 @@ namespace EntertechFP.UI.Controllers.User
             {
                 var entegratorRequest = requestHelper.Action<List<EntegratorEventDto>>($"entegratorEvent/{eventId}?include=1", ActionType.Get, null);
                 var entegratorModel = entegratorRequest.Result.Data;
-                if(entegratorModel is not null)
+                if (entegratorModel is not null)
                 {
                     viewModel.Entegrators = entegratorModel.Select(e => e.Entegrator).ToList();
                 }
             }
             viewModel.IsAttended = viewModel.Event.EventAttendances.Where(e => e.UserId == user.UserId).FirstOrDefault() is not null;
-            if(success is not null)
+            if (success is not null)
             {
                 ViewBag.Alert = success;
                 ViewBag.Message = TempData["Message"];
             }
+            ViewBag.CanChange = viewModel.Event.UserId == user.UserId && (viewModel.Event.LastAttendDate-DateTime.Now).TotalDays>5;
             return View(viewModel);
         }
         public IActionResult AttendEvent(int eventId)
         {
             var request = requestHelper.Action<EventAttendanceDto>($"eventAttendance/{eventId}/{user.UserId}", ActionType.Post, null);
             TempData["Message"] = (request.Result.Success) ? "Başarılı bir şekilde etkinliğe katıldınız." : "Etkinliğine katılamadınız.";
+            GetUser();
             return RedirectToAction(nameof(EventDetails), "User", new { eventId = eventId, success = request.Result.Success });
         }
         public IActionResult LeaveEvent(int eventId)
         {
             var request = requestHelper.Action<EventAttendanceDto>($"eventAttendance/{eventId}/{user.UserId}", ActionType.Delete, null);
             TempData["Message"] = (request.Result.Success) ? "Başarılı bir şekilde etkinlikten ayrıldınız." : "Etkinlikten ayrılamadınız.";
-            return RedirectToAction(nameof(EventDetails), "User", new { eventId=eventId,success = request.Result.Success });
+            GetUser();
+            return RedirectToAction(nameof(EventDetails), "User", new { eventId = eventId, success = request.Result.Success });
         }
         public IActionResult AttendedEvents()
         {
@@ -119,6 +121,21 @@ namespace EntertechFP.UI.Controllers.User
             return View(model);
         }
 
+        public IActionResult MyEvents()
+        {
+            var request = requestHelper.Action<List<EventDto>>($"event?include=1&userId={user.UserId}", ActionType.Get, null);
+            var model = request.Result.Data;
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult UpdateEvent(EventDto model)
+        {
+            var request = requestHelper.Action($"event/{model.EventId}", ActionType.Patch, model);
+            var success = request.Result.Success;
+            TempData["Message"] = (success) ? "Etkinlik başarılı bir şekilde güncellendi." : "Etkinlik güncellenemedi.";
+            return RedirectToAction(nameof(EventDetails), "User", new { eventId = model.EventId, success = request.Result.Success });
+
+        }
         #endregion
     }
 }

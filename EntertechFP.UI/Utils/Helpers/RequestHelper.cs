@@ -1,6 +1,7 @@
 ﻿using EntertechFP.UI.Models.Responses;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace EntertechFP.UI.Utils.Helpers
 {
@@ -31,7 +32,7 @@ namespace EntertechFP.UI.Utils.Helpers
                     client.DefaultRequestHeaders.Add("ApiKey", apiKey);
                     var item = (data is not null) ? data.GetType().GetProperties() : null;
                     if (actionType != ActionType.Get && actionType != ActionType.Delete)
-                        serialized = JsonSerializer.Serialize(data);
+                        serialized = JsonSerializer.Serialize(data,data.GetType(),new JsonSerializerOptions { DefaultIgnoreCondition=JsonIgnoreCondition.WhenWritingNull});
                     switch (actionType)
                     {
                         case ActionType.Get:

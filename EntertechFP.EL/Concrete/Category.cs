@@ -13,6 +13,6 @@ namespace EntertechFP.EL.Concrete
         public int CategoryId { get; set; }
         public string CategoryName { get; set; } = null!;
 
-        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<Event>? Events { get; set; }
     }
 }

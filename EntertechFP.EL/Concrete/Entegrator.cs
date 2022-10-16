@@ -17,6 +17,6 @@ namespace EntertechFP.EL.Concrete
         public string Password { get; set; } = null!;
         public string ApiKey { get; set; } = null!;
 
-        public virtual ICollection<EntegratorEvent> EntegratorEvents { get; set; }
+        public virtual ICollection<EntegratorEvent>? EntegratorEvents { get; set; }
     }
 }
