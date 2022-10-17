@@ -55,6 +55,7 @@ namespace EntertechFP.UI.Controllers.User
         [HttpGet]
         public IActionResult ChangePassword()
         {
+            GetUser();
             return View();
         }
         [HttpPost]

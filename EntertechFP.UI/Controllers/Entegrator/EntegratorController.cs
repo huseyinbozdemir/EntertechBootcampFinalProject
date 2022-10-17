@@ -1,9 +1,11 @@
 ﻿using EntertechFP.UI.Models.Entitities;
 using EntertechFP.UI.Utils.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntertechFP.UI.Controllers.Entegrator
 {
+    [Authorize(AuthenticationSchemes = "entegrator_scheme")]
     public class EntegratorController : Controller
     {
         private readonly CookieHelper cookieHelper;
