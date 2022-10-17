@@ -133,6 +133,17 @@
 
                 }
             }
+            else{
+                const urlParams = new URLSearchParams(window.location.search);
+                const categoryId = urlParams.get('categoryId');
+                if (categoryId !== null) {
+                    window.location.href = "/User/Events?categoryId=" + categoryId;
+
+                }
+                else {
+                    window.location.href = "/User/Events";
+                }
+            }
 
         }
         function categoryChange(){
@@ -147,6 +158,17 @@
                 else{
                     window.location.href = "/User/Events?categoryId=" + val;
 
+                }
+            }
+            else{
+                const urlParams = new URLSearchParams(window.location.search);
+                const cityId = urlParams.get('cityId');
+                if (cityId !== null) {
+                    window.location.href = "/User/Events?cityId=" + cityId;
+
+                }
+                else{
+                    window.location.href="/User/Events";
                 }
             }
         }

@@ -22,6 +22,15 @@
                     options.LogoutPath = "/login";
 
                 });
+            services.AddAuthentication(options => options.DefaultScheme = "entegrator_scheme")
+                .AddCookie("entegrator_scheme", options =>
+                {
+                    options.LoginPath = "/login";
+                    options.Cookie.Name = "entegrator_session";
+                    options.AccessDeniedPath = "/login";
+                    options.LogoutPath = "/login";
+
+                });
             return services;
         }
     }

@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+}
+@using EntertechFP.UI.Models.Entitities
+@model EntegratorDto
+
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Entertech FP | Entegratör</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~//plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/adminlte.min.css">
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box" style="width: %50!important">
+        <div class="login-logo">
+            <a href="#"><b>Online Etkinlik Sitesi</b> Entegrasyonu</a>
+        </div>
+        <div class="card">
+            <div class="card-body login-card-body">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" value="@Model.EntegratorName" readonly>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-link"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" value="@Model.DomainName" readonly>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-globe"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" value="@Model.EmailAdress" readonly>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" id="apikey" class="form-control" value="@Model.ApiKey" readonly>
+                    <div class="input-group-append">
+                        <div class="input-group-text" onclick="keySecret()">
+                            <span id="keyLogo" class="fas fa-eye" ></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/adminlte.min.js"></script>
+    <script type="text/javascript">
+        function keySecret(){
+            var keyInput = document.getElementById("apikey");
+            var keyLogo = document.getElementById("keyLogo");
+            if (keyInput.type == "password") {
+                keyInput.type = "text";
+                keyLogo.className = "fas fa-eye-slash";
+            }
+            else{
+                keyInput.type = "password";
+                keyLogo.className = "fas fa-eye";
+
+            }
+        }
+    </script>
+</body>
+</html>

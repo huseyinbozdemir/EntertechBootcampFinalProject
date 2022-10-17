@@ -2,14 +2,8 @@
 using EntertechFP.API.Responses;
 using EntertechFP.API.Utils;
 using EntertechFP.BL.Abstract;
-using EntertechFP.BL.Concrete;
-using EntertechFP.DAL.Abstract;
-using EntertechFP.DAL.Concrete;
-using EntertechFP.DAL.Concrete.Contexts;
 using EntertechFP.EL.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Mail;
 
 namespace EntertechFP.API.Controllers
 {

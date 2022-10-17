@@ -123,6 +123,16 @@ namespace EntertechFP.UI.Controllers.User
             }
             return RedirectToAction(nameof(Events), "User");
         }
+        public IActionResult CancelEvent(int eventId)
+        {
+            GetUser();
+            if (!user.Events.Any(e => e.EventId == eventId))
+                return RedirectToAction(nameof(Events), "User");
+            var request = requestHelper.Action<EventDto>($"event/{eventId}", ActionType.Delete, null);
+            var success = request.Result.Success;
+            TempData["Message"] = (success) ? "Etkinlik başarıyla silindi" : "Etkinlik silinemedi";
+            return RedirectToAction(nameof(Events), "User", new { success = success });
+        }
         public IActionResult AttendEvent(int eventId)
         {
             var request = requestHelper.Action<EventAttendanceDto>($"eventAttendance/{eventId}/{user.UserId}", ActionType.Post, null);

@@ -30,8 +30,7 @@ namespace EntertechFP.UI.Utils.Helpers
                     HttpResponseMessage response = null;
                     url = $"http://localhost:50375/api/{url}";
                     client.DefaultRequestHeaders.Add("ApiKey", apiKey);
-                    var item = (data is not null) ? data.GetType().GetProperties() : null;
-                    if (actionType != ActionType.Get && actionType != ActionType.Delete)
+                    if (actionType != ActionType.Get && actionType != ActionType.Delete && data is not null)
                         serialized = JsonSerializer.Serialize(data,data.GetType(),new JsonSerializerOptions { DefaultIgnoreCondition=JsonIgnoreCondition.WhenWritingNull});
                     switch (actionType)
                     {

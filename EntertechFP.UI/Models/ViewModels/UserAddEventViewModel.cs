@@ -22,7 +22,7 @@ namespace EntertechFP.UI.Models.ViewModels
         [Display(Name = "Açıklama")]
         public string Description { get; set; }
 
-        [Range(10,300,ErrorMessage = "Kapasite en az 10, en fazla 300 seçilebilir.")]
+        [Range(2,300,ErrorMessage = "Kapasite en az 2, en fazla 300 seçilebilir.")]
         [Display(Name = "Kapasite")]
         public int Capacity { get; set; }
 

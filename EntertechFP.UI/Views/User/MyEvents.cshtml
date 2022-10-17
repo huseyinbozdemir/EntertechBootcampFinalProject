@@ -16,7 +16,7 @@
                 <th style="width: 30%">Etkinliği Düzenleyen</th>
                 <th style="width: 10%">Kategori</th>
                 <th style="width: 10%">Şehir</th>
-                <th>Kapasite</th>
+                <th class="text-center">Kapasite</th>
                 <th style="width: 10%" class="text-center">Durum</th>
 
             </tr>
@@ -58,7 +58,9 @@
                             @switch (Model[i].IsApproved)
                             {
                                 case true:
-                                    <span class="badge bg-success">Onaylandı</span>
+                                    <a href="@Url.Action("EventDetails","User",new {EventId=Model[i].EventId})" class="badge bg-success">
+                                        Onaylandı
+                                    </a>
                                     break;
                                 case false:
                                     <span class="badge bg-danger">Reddedildi</span>

@@ -95,7 +95,7 @@
                     }
                 }
                 else{
-                    
+                    <a onclick="Cancel(@Model.Event.EventId)" class="btn btn-danger">Etkinliği İptal Et</a>
                     <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
                 }
                 </form>
@@ -107,6 +107,22 @@
 @section Scripts{
 
     <script type="text/javascript">
+        function Cancel(id) {
+            Swal.fire({
+                title: 'Emin misiniz?',
+                text: "Değişiklikler geri alınmayacaktır!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet',
+                cancelButtonText: 'Hayır',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/User/CancelEvent?eventId=" + id;
+                }
+            })
+        }
         $(document).ready(function () {
             var msg = "@ViewBag.Alert";
             if (msg.toLowerCase() == "false") {
