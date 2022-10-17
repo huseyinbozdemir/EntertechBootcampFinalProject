@@ -2,13 +2,13 @@
 using EntertechFP.API.Models.Entities;
 using EntertechFP.API.Responses;
 using EntertechFP.BL.Abstract;
-using EntertechFP.BL.Concrete;
-using EntertechFP.DAL.Abstract;
-using EntertechFP.DAL.Concrete;
-using EntertechFP.DAL.Concrete.Contexts;
 using EntertechFP.EL.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Unicode;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -29,9 +29,22 @@ namespace EntertechFP.API.EntegratorApi
             this.entegratorEventService = entegratorEventService;
             this.mapper = mapper;
         }
-
+        private string GetApiKey(HttpRequest request)
+        {
+            var headers = request.Headers;
+            var token = headers["apikey"];
+            return token;
+        }
         private bool IsExists(string apiKey) => !(entegratorService.Get(e => e.ApiKey.Equals(apiKey)) is null);
-        private string JsonSerialize<T>(T data) => JsonSerializer.Serialize(data);
+        private string JsonSerialize<T>(T data) 
+            => JsonSerializer.Serialize(data,
+                new JsonSerializerOptions 
+                {
+                    Encoder= JavaScriptEncoder.Create(UnicodeRanges.All),
+                    DefaultIgnoreCondition=JsonIgnoreCondition.WhenWritingNull,
+                    WriteIndented = true,
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
         private string XmlSerialize<T>(T data)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T), new XmlRootAttribute("Response"));
@@ -44,12 +57,13 @@ namespace EntertechFP.API.EntegratorApi
                 }
             }
         }
-        [HttpGet("{apikey}/{type}")]
-        public string GetEvents(string apiKey, string type = "json")
+        [HttpGet("{type=json}")]
+        public string GetEvents(string type)
         {
+            var apiKey = GetApiKey(Request);
             if (IsExists(apiKey))
             {
-                var data = eventService.GetAll(x => x.IsTicketed && x.EventDate > DateTime.Now && x.IsApproved==true);
+                var data = eventService.GetAll(x => x.IsTicketed && x.EventDate > DateTime.Now && x.IsApproved==true,e=>e.Category,e=>e.City);
                 var dto = mapper.Map<List<EventDto>>(data);
                 return (type.Equals("xml"))
                     ? XmlSerialize(new BaseResponse<List<EventDto>>(dto))
@@ -61,8 +75,9 @@ namespace EntertechFP.API.EntegratorApi
                     : JsonSerialize(new BaseResponse<List<EventDto>>("Api Key doğrulanamadı."));
         }
         [HttpPost("{id}")]
-        public BaseResponse<EntegratorEvent> CreateTicket(int id, [FromQuery] string apiKey)
+        public BaseResponse<EntegratorEvent> CreateTicket(int id)
         {
+            var apiKey = GetApiKey(Request);
             if (IsExists(apiKey))
             {
                 var entegrator = entegratorService.Get(e => e.ApiKey.Equals(apiKey));
@@ -81,8 +96,9 @@ namespace EntertechFP.API.EntegratorApi
                 return new BaseResponse<EntegratorEvent>("Api Key doğrulanamadı.");
         }
         [HttpPatch("sell/{id}")]
-        public BaseResponse<Event> SellTicket(int id, [FromQuery]string apiKey)
+        public BaseResponse<Event> SellTicket(int id)
         {
+            var apiKey = GetApiKey(Request);
             if (IsExists(apiKey))
             {
                 var entegrator = entegratorService.Get(e => e.ApiKey.Equals(apiKey));
@@ -98,8 +114,9 @@ namespace EntertechFP.API.EntegratorApi
                 return new BaseResponse<Event>("Api Key doğrulanamadı.");
         }
         [HttpPatch("cancel/{id}")]
-        public BaseResponse<Event> CancelTicket(int id, [FromQuery] string apiKey)
+        public BaseResponse<Event> CancelTicket(int id)
         {
+            var apiKey = GetApiKey(Request);
             if (IsExists(apiKey))
             {
                 var entegrator = entegratorService.Get(e => e.ApiKey.Equals(apiKey));

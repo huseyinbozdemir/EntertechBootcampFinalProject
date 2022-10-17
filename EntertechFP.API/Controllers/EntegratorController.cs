@@ -44,6 +44,7 @@ namespace EntertechFP.API.Controllers
             if (data is not null)
                 return new BaseResponse<Entegrator>("Bu mail'e kayıtlı kullanıcı mevcut.");
             entegrator.ApiKey = Util.CreateApiKey();
+            entegrator.Password = Util.HashToMD5(entegrator.Password);
             entegratorService.Add(entegrator);
             return new BaseResponse<Entegrator>(entegrator);
         }

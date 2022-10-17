@@ -1,0 +1,98 @@
+﻿@using EntertechFP.UI.Models.ViewModels
+@{
+    Layout = null;
+}
+@model UserRegisterViewModel
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Online Etkinlik Sistemi</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/adminlte.min.css">
+</head>
+<body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="#" class="h1"><b>Kayıt</b> Ol</a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">Entertech Final Project</p>
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <form action="@Url.Action("Index","Register")" method="post">
+                        <div class="input-group mb-3">
+                            @Html.TextBoxFor(m=>m.FirstName,new {@class="form-control", placeholder="İsim"})
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.TextBoxFor(m=>m.LastName,new {@class="form-control", placeholder="Soyisim"})
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.TextBoxFor(m=>m.EmailAddress,new {@class="form-control", placeholder="Email"})
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.PasswordFor(m=>m.Password,new {@class="form-control", placeholder="Şifre"})
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.PasswordFor(m=>m.ConfirmPassword,new {@class="form-control", placeholder="Şifre (Tekrar)"})
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                            @Html.CheckBoxFor(m=>m.CheckUserTerms,false)
+                                <label for="CheckUserTerms">
+                                    <a href="#">Üyelik Sözleşmesi</a>'ni kabul ediyorum
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
+                        </div>
+
+                    </div>
+                </form>
+                <div class="row d-flex justify-content-center">
+                    <a href="@Url.Action("Entegrator","Register")" class="text-center">Entegrator Firma Kaydı</a>
+
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <a href="@Url.Action("Index","Login")" class="text-center">Zaten Üyeyim</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/adminlte.min.js"></script>
+</body>
+</html>
